@@ -14,10 +14,10 @@
 #define SS 0
 
 typedef struct _MASTER_BOOT_RECODE{
-   uint8_t    fileSystemDescriptor;       /* 1:FAT12, 4:FAT16(less than 32MB), 5:Šg’£ DOS ƒp[ƒeƒBƒVƒ‡ƒ“,
+   uint8_t    fileSystemDescriptor;       /* 1:FAT12, 4:FAT16(less than 32MB), 5:æ‹¡å¼µ DOS ãƒ‘ãƒ¼ãƒ†ã‚£ã‚·ãƒ§ãƒ³,
                                            6:FAT16(more 32MB), 0xb:FAT32(more 2GB),
-                                           0xc:FAT32 Int32h Šg’£, 0xe:FAT16 Int32h Šg’£,
-                                           0xf:Šg’£ DOS ƒp[ƒeƒBƒVƒ‡ƒ“‚Ì Int32h Šg’£ */
+                                           0xc:FAT32 Int32h æ‹¡å¼µ, 0xe:FAT16 Int32h æ‹¡å¼µ,
+                                           0xf:æ‹¡å¼µ DOS ãƒ‘ãƒ¼ãƒ†ã‚£ã‚·ãƒ§ãƒ³ã® Int32h æ‹¡å¼µ */
    uint32_t    firstSectorNumbers;      /* first sector number (link to BPB sector) */
    uint32_t    numberOfSectors;
 } MASTER_BOOT_RECODE;
@@ -61,11 +61,11 @@ typedef struct _DIR_ENTRY{
                                      bit 1    system flag
                                      bit 0    read only flag */
     //uint8_t    reserved;           /* use NT or same OS */
-    //uint8_t    createTimeMs;       /* VFAT ‚Åg—p‚·‚éƒtƒ@ƒCƒ‹ì¬‚Ì10ƒ~ƒŠ•b (0 ` 199) */
-    //uint8_t    createTime[2];      /* VFAT ‚Åg—p‚·‚éƒtƒ@ƒCƒ‹ì¬ŠÔ */
-    //uint8_t    createDate[2];      /* VFAT ‚Åg—p‚·‚éƒtƒ@ƒCƒ‹ì¬“ú•t */
-    //uint8_t    accessDate[2];      /* VFAT ‚Åg—p‚·‚éƒtƒ@ƒCƒ‹EƒAƒNƒZƒX“ú•t */
-    //uint8_t    clusterHighWord[2]; /* FAT32 ‚Åg—p‚·‚éƒNƒ‰ƒXƒ^”Ô†‚ÌãˆÊ 16 bits */
+    //uint8_t    createTimeMs;       /* VFAT ã§ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ™‚åˆ»ã®10ãƒŸãƒªç§’ (0 ã€œ 199) */
+    //uint8_t    createTime[2];      /* VFAT ã§ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ™‚é–“ */
+    //uint8_t    createDate[2];      /* VFAT ã§ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆæ—¥ä»˜ */
+    //uint8_t    accessDate[2];      /* VFAT ã§ä½¿ç”¨ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ã‚¢ã‚¯ã‚»ã‚¹æ—¥ä»˜ */
+    //uint8_t    clusterHighWord[2]; /* FAT32 ã§ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹ã‚¿ç•ªå·ã®ä¸Šä½ 16 bits */
     //uint8_t    updateTime[2];
     //uint8_t    updateDate[2];
     uint16_t    cluster;         /* start cluster number */

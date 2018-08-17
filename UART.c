@@ -8,21 +8,21 @@ void UART_str(char *str);
 
 void UART_put(char c)
 {
-	while(!(UCSR0A & 0b00100000)){} //UDREƒrƒbƒg‚ª1‚É‚È‚é‚Ü‚Å‘Ò‚Â
+	while(!(UCSR0A & 0b00100000)){} //UDREãƒ“ãƒƒãƒˆãŒ1ã«ãªã‚‹ã¾ã§å¾…ã¤
     UDR0 = c;
 }
 
 char UART_rec(void){
 	char c;
-	while(!(UCSR0A & 0b10000000)){} //RXCƒrƒbƒg‚ª1‚É‚È‚é‚Ü‚Å‘Ò‚Â
+	while(!(UCSR0A & 0b10000000)){} //RXCãƒ“ãƒƒãƒˆãŒ1ã«ãªã‚‹ã¾ã§å¾…ã¤
 	c = UDR0;
 	return c;
 }
 
 void UART_init(void)
 {
-	UBRR0 = 64;    /* 10MHz‚É‚Ä1200bpsİ’è */
- 	UCSR0B = 0b00011000; /* ‘—M‹–‰Â */
+	UBRR0 = 64;    /* 10MHzã«ã¦1200bpsè¨­å®š */
+ 	UCSR0B = 0b00011000; /* é€ä¿¡è¨±å¯ */
 }
 
 void UART_sendHEX(uint8_t data)
@@ -31,7 +31,7 @@ void UART_sendHEX(uint8_t data)
 	
 	for(uint8_t i=0; i<2; i++){
 		if(a<10)
-			UART_put(48+a);		/*	ASCII‚Å‚Í'0'=48	*/
+			UART_put(48+a);		/*	ASCIIã§ã¯'0'=48	*/
 		if(a==10)
 			UART_put('A');
 		if(a==11)

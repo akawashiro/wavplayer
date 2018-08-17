@@ -25,7 +25,7 @@ void sd_init(void)
 {
 	char ch;
 	
-	SPI_DDR |= ((1<<SCK) | (1<<MOSI) | (1<<2));		//SS(PORTB2)‚ÍŽg‚í‚È‚¢‚¯‚ÇÝ’è‚µ‚È‚¢‚Æ“®‚©‚È‚¢
+	SPI_DDR |= ((1<<SCK) | (1<<MOSI) | (1<<2));		//SS(PORTB2)ã¯ä½¿ã‚ãªã„ã‘ã©è¨­å®šã—ãªã„ã¨å‹•ã‹ãªã„
 	SPI_DDR &= ~(1<<MISO);
 	SPI_PORT = 0x00;
 	SS_DDR  |= (1<<SS);
@@ -33,7 +33,7 @@ void sd_init(void)
 	SPSR |= (1<<SPI2X);
 	wait_ms(20);
 	
-	/*    74ƒNƒƒbƒN‘—‚é      */
+	/*    74ã‚¯ãƒ­ãƒƒã‚¯é€ã‚‹      */
 	SS_PORT  |= (1<<SS);
 	for(char i=0; i<10; i++){
 		SPDR = 0xff;
