@@ -1,0 +1,2589 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000052  00800100  00000c40  00000cb4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000c40  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000028  00800152  00000c92  00000d06  2**0
+                  ALLOC
+  3 .debug_aranges 00000060  00000000  00000000  00000d06  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 00000181  00000000  00000000  00000d66  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000f59  00000000  00000000  00000ee7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000045a  00000000  00000000  00001e40  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000ff0  00000000  00000000  0000229a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000170  00000000  00000000  0000328c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000284  00000000  00000000  000033fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000003a3  00000000  00000000  00003680  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000c0  00000000  00000000  00003a23  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 11 01 	jmp	0x222	; 0x222 <__vector_1>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 bb 00 	jmp	0x176	; 0x176 <__vector_14>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d4 e0       	ldi	r29, 0x04	; 4
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 e4       	ldi	r30, 0x40	; 64
+  7c:	fc e0       	ldi	r31, 0x0C	; 12
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
+
+00000080 <.do_copy_data_loop>:
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+
+00000084 <.do_copy_data_start>:
+  84:	a2 35       	cpi	r26, 0x52	; 82
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <.do_copy_data_loop>
+
+0000008a <__do_clear_bss>:
+  8a:	11 e0       	ldi	r17, 0x01	; 1
+  8c:	a2 e5       	ldi	r26, 0x52	; 82
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	aa 37       	cpi	r26, 0x7A	; 122
+  96:	b1 07       	cpc	r27, r17
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 74 00 	call	0xe8	; 0xe8 <main>
+  9e:	0c 94 1e 06 	jmp	0xc3c	; 0xc3c <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__heap_end>
+
+000000a6 <timer_init>:
+		SD_openNowDir();
+	}
+}
+
+void timer_init(void)
+{
+  a6:	84 b1       	in	r24, 0x04	; 4
+  a8:	86 60       	ori	r24, 0x06	; 6
+  aa:	84 b9       	out	0x04, r24	; 4
+	DDRB  |= 0b00000110;
+	
+	TCCR1A = 0b10110001;
+  ac:	e0 e8       	ldi	r30, 0x80	; 128
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	81 eb       	ldi	r24, 0xB1	; 177
+  b2:	80 83       	st	Z, r24
+	TCCR1B = 0b00001001;
+  b4:	89 e0       	ldi	r24, 0x09	; 9
+  b6:	80 93 81 00 	sts	0x0081, r24
+	OCR1A  = 0x80;
+  ba:	f0 93 89 00 	sts	0x0089, r31
+  be:	e0 93 88 00 	sts	0x0088, r30
+	OCR1B  = 0x80;
+  c2:	f0 93 8b 00 	sts	0x008B, r31
+  c6:	e0 93 8a 00 	sts	0x008A, r30
+	
+	TCCR0A = 0b00000010;
+  ca:	92 e0       	ldi	r25, 0x02	; 2
+  cc:	94 bd       	out	0x24, r25	; 36
+	TCCR0B = 0b00000010;
+  ce:	95 bd       	out	0x25, r25	; 37
+	OCR0A  = 78; //78 = 128bps 
+  d0:	8e e4       	ldi	r24, 0x4E	; 78
+  d2:	87 bd       	out	0x27, r24	; 39
+	TIMSK0 = (1<<OCIE0A);
+  d4:	90 93 6e 00 	sts	0x006E, r25
+}
+  d8:	08 95       	ret
+
+000000da <button_init>:
+
+void button_init(void)
+{
+  da:	52 98       	cbi	0x0a, 2	; 10
+	DDRD  &= 0b11111011;
+	PORTD |= 0b00000100;
+  dc:	5a 9a       	sbi	0x0b, 2	; 11
+	
+	EICRA = 0b00000000;
+  de:	10 92 69 00 	sts	0x0069, r1
+	EIMSK = 0b00000001;
+  e2:	81 e0       	ldi	r24, 0x01	; 1
+  e4:	8d bb       	out	0x1d, r24	; 29
+}
+  e6:	08 95       	ret
+
+000000e8 <main>:
+
+int main(void)
+{
+  e8:	0e 94 16 02 	call	0x42c	; 0x42c <sd_init>
+	sd_init();
+	
+	SD_readMRB();
+  ec:	0e 94 05 03 	call	0x60a	; 0x60a <SD_readMRB>
+	
+	SD_readBPB();
+  f0:	0e 94 a7 03 	call	0x74e	; 0x74e <SD_readBPB>
+	
+	nowDir.nowFile = 0;
+  f4:	10 92 67 01 	sts	0x0167, r1
+  f8:	10 92 66 01 	sts	0x0166, r1
+  fc:	04 c0       	rjmp	.+8      	; 0x106 <main+0x1e>
+	
+	while(!(nowDir.name[0] != 0xe5 && nowDir.name[0] != 0x05 && 
+		nowDir.extension[0] == 'W' && nowDir.extension[1] == 'A' && nowDir.extension[2] == 'V'))
+		getNextDir(&nowDir);
+  fe:	82 e5       	ldi	r24, 0x52	; 82
+ 100:	91 e0       	ldi	r25, 0x01	; 1
+ 102:	0e 94 5e 04 	call	0x8bc	; 0x8bc <getNextDir>
+	
+	SD_readBPB();
+	
+	nowDir.nowFile = 0;
+	
+	while(!(nowDir.name[0] != 0xe5 && nowDir.name[0] != 0x05 && 
+ 106:	80 91 52 01 	lds	r24, 0x0152
+ 10a:	85 3e       	cpi	r24, 0xE5	; 229
+ 10c:	c1 f3       	breq	.-16     	; 0xfe <main+0x16>
+ 10e:	85 30       	cpi	r24, 0x05	; 5
+ 110:	b1 f3       	breq	.-20     	; 0xfe <main+0x16>
+ 112:	80 91 5b 01 	lds	r24, 0x015B
+ 116:	87 35       	cpi	r24, 0x57	; 87
+ 118:	91 f7       	brne	.-28     	; 0xfe <main+0x16>
+ 11a:	80 91 5c 01 	lds	r24, 0x015C
+ 11e:	81 34       	cpi	r24, 0x41	; 65
+ 120:	71 f7       	brne	.-36     	; 0xfe <main+0x16>
+ 122:	80 91 5d 01 	lds	r24, 0x015D
+ 126:	86 35       	cpi	r24, 0x56	; 86
+ 128:	51 f7       	brne	.-44     	; 0xfe <main+0x16>
+		nowDir.extension[0] == 'W' && nowDir.extension[1] == 'A' && nowDir.extension[2] == 'V'))
+		getNextDir(&nowDir);
+	
+	SD_openNowDir();
+ 12a:	0e 94 61 05 	call	0xac2	; 0xac2 <SD_openNowDir>
+	}
+}
+
+void timer_init(void)
+{
+	DDRB  |= 0b00000110;
+ 12e:	84 b1       	in	r24, 0x04	; 4
+ 130:	86 60       	ori	r24, 0x06	; 6
+ 132:	84 b9       	out	0x04, r24	; 4
+	
+	TCCR1A = 0b10110001;
+ 134:	20 e8       	ldi	r18, 0x80	; 128
+ 136:	30 e0       	ldi	r19, 0x00	; 0
+ 138:	81 eb       	ldi	r24, 0xB1	; 177
+ 13a:	80 93 80 00 	sts	0x0080, r24
+	TCCR1B = 0b00001001;
+ 13e:	89 e0       	ldi	r24, 0x09	; 9
+ 140:	80 93 81 00 	sts	0x0081, r24
+	OCR1A  = 0x80;
+ 144:	30 93 89 00 	sts	0x0089, r19
+ 148:	20 93 88 00 	sts	0x0088, r18
+	OCR1B  = 0x80;
+ 14c:	30 93 8b 00 	sts	0x008B, r19
+ 150:	20 93 8a 00 	sts	0x008A, r18
+	
+	TCCR0A = 0b00000010;
+ 154:	92 e0       	ldi	r25, 0x02	; 2
+ 156:	94 bd       	out	0x24, r25	; 36
+	TCCR0B = 0b00000010;
+ 158:	95 bd       	out	0x25, r25	; 37
+	OCR0A  = 78; //78 = 128bps 
+ 15a:	8e e4       	ldi	r24, 0x4E	; 78
+ 15c:	87 bd       	out	0x27, r24	; 39
+	TIMSK0 = (1<<OCIE0A);
+ 15e:	90 93 6e 00 	sts	0x006E, r25
+}
+
+void button_init(void)
+{
+	DDRD  &= 0b11111011;
+ 162:	52 98       	cbi	0x0a, 2	; 10
+	PORTD |= 0b00000100;
+ 164:	5a 9a       	sbi	0x0b, 2	; 11
+	
+	EICRA = 0b00000000;
+ 166:	10 92 69 00 	sts	0x0069, r1
+	EIMSK = 0b00000001;
+ 16a:	81 e0       	ldi	r24, 0x01	; 1
+ 16c:	8d bb       	out	0x1d, r24	; 29
+	
+	timer_init();
+	
+	button_init();
+	
+	UART_init();
+ 16e:	0e 94 8a 01 	call	0x314	; 0x314 <UART_init>
+	
+	sei();
+ 172:	78 94       	sei
+ 174:	ff cf       	rjmp	.-2      	; 0x174 <main+0x8c>
+
+00000176 <__vector_14>:
+	
+	UART_str("\n\rINT0_vect end\n\r");
+}
+
+ISR(TIMER0_COMPA_vect)
+{
+ 176:	1f 92       	push	r1
+ 178:	0f 92       	push	r0
+ 17a:	0f b6       	in	r0, 0x3f	; 63
+ 17c:	0f 92       	push	r0
+ 17e:	11 24       	eor	r1, r1
+ 180:	2f 93       	push	r18
+ 182:	3f 93       	push	r19
+ 184:	4f 93       	push	r20
+ 186:	5f 93       	push	r21
+ 188:	6f 93       	push	r22
+ 18a:	7f 93       	push	r23
+ 18c:	8f 93       	push	r24
+ 18e:	9f 93       	push	r25
+ 190:	af 93       	push	r26
+ 192:	bf 93       	push	r27
+ 194:	ef 93       	push	r30
+ 196:	ff 93       	push	r31
+ 198:	df 93       	push	r29
+ 19a:	cf 93       	push	r28
+ 19c:	0f 92       	push	r0
+ 19e:	cd b7       	in	r28, 0x3d	; 61
+ 1a0:	de b7       	in	r29, 0x3e	; 62
+	uint8_t res;
+	
+	OCR1A = wave;
+ 1a2:	80 91 50 01 	lds	r24, 0x0150
+ 1a6:	90 e0       	ldi	r25, 0x00	; 0
+ 1a8:	90 93 89 00 	sts	0x0089, r25
+ 1ac:	80 93 88 00 	sts	0x0088, r24
+	OCR1B = wave;
+ 1b0:	90 93 8b 00 	sts	0x008B, r25
+ 1b4:	80 93 8a 00 	sts	0x008A, r24
+	wave = SD_readNowDir(&res);
+ 1b8:	ce 01       	movw	r24, r28
+ 1ba:	01 96       	adiw	r24, 0x01	; 1
+ 1bc:	0e 94 9b 05 	call	0xb36	; 0xb36 <SD_readNowDir>
+ 1c0:	80 93 50 01 	sts	0x0150, r24
+	
+	if(res == 0){
+ 1c4:	89 81       	ldd	r24, Y+1	; 0x01
+ 1c6:	88 23       	and	r24, r24
+ 1c8:	c1 f4       	brne	.+48     	; 0x1fa <__vector_14+0x84>
+		do{
+			getNextDir(&nowDir);
+ 1ca:	82 e5       	ldi	r24, 0x52	; 82
+ 1cc:	91 e0       	ldi	r25, 0x01	; 1
+ 1ce:	0e 94 5e 04 	call	0x8bc	; 0x8bc <getNextDir>
+		}while(!(nowDir.name[0] != 0xe5 && nowDir.name[0] != 0x05 && 
+			nowDir.extension[0] == 'W' && nowDir.extension[1] == 'A' && nowDir.extension[2] == 'V'));
+ 1d2:	80 91 52 01 	lds	r24, 0x0152
+ 1d6:	85 3e       	cpi	r24, 0xE5	; 229
+ 1d8:	c1 f3       	breq	.-16     	; 0x1ca <__vector_14+0x54>
+ 1da:	85 30       	cpi	r24, 0x05	; 5
+ 1dc:	b1 f3       	breq	.-20     	; 0x1ca <__vector_14+0x54>
+ 1de:	80 91 5b 01 	lds	r24, 0x015B
+ 1e2:	87 35       	cpi	r24, 0x57	; 87
+ 1e4:	91 f7       	brne	.-28     	; 0x1ca <__vector_14+0x54>
+ 1e6:	80 91 5c 01 	lds	r24, 0x015C
+ 1ea:	81 34       	cpi	r24, 0x41	; 65
+ 1ec:	71 f7       	brne	.-36     	; 0x1ca <__vector_14+0x54>
+ 1ee:	80 91 5d 01 	lds	r24, 0x015D
+ 1f2:	86 35       	cpi	r24, 0x56	; 86
+ 1f4:	51 f7       	brne	.-44     	; 0x1ca <__vector_14+0x54>
+		SD_openNowDir();
+ 1f6:	0e 94 61 05 	call	0xac2	; 0xac2 <SD_openNowDir>
+	}
+}
+ 1fa:	0f 90       	pop	r0
+ 1fc:	cf 91       	pop	r28
+ 1fe:	df 91       	pop	r29
+ 200:	ff 91       	pop	r31
+ 202:	ef 91       	pop	r30
+ 204:	bf 91       	pop	r27
+ 206:	af 91       	pop	r26
+ 208:	9f 91       	pop	r25
+ 20a:	8f 91       	pop	r24
+ 20c:	7f 91       	pop	r23
+ 20e:	6f 91       	pop	r22
+ 210:	5f 91       	pop	r21
+ 212:	4f 91       	pop	r20
+ 214:	3f 91       	pop	r19
+ 216:	2f 91       	pop	r18
+ 218:	0f 90       	pop	r0
+ 21a:	0f be       	out	0x3f, r0	; 63
+ 21c:	0f 90       	pop	r0
+ 21e:	1f 90       	pop	r1
+ 220:	18 95       	reti
+
+00000222 <__vector_1>:
+void UART_init(void);
+void UART_sendHEX(uint8_t data);
+void UART_str(char *str);
+
+ISR( INT0_vect )
+{
+ 222:	1f 92       	push	r1
+ 224:	0f 92       	push	r0
+ 226:	0f b6       	in	r0, 0x3f	; 63
+ 228:	0f 92       	push	r0
+ 22a:	11 24       	eor	r1, r1
+ 22c:	2f 93       	push	r18
+ 22e:	3f 93       	push	r19
+ 230:	4f 93       	push	r20
+ 232:	5f 93       	push	r21
+ 234:	6f 93       	push	r22
+ 236:	7f 93       	push	r23
+ 238:	8f 93       	push	r24
+ 23a:	9f 93       	push	r25
+ 23c:	af 93       	push	r26
+ 23e:	bf 93       	push	r27
+ 240:	cf 93       	push	r28
+ 242:	df 93       	push	r29
+ 244:	ef 93       	push	r30
+ 246:	ff 93       	push	r31
+	UART_str("\n\rINT0_vect\n\r");
+ 248:	80 e0       	ldi	r24, 0x00	; 0
+ 24a:	91 e0       	ldi	r25, 0x01	; 1
+ 24c:	0e 94 ed 01 	call	0x3da	; 0x3da <UART_str>
+ 250:	c0 e0       	ldi	r28, 0x00	; 0
+ 252:	d0 e0       	ldi	r29, 0x00	; 0
+	
+	uint16_t i;
+	
+	for(i=0; i<40; i++){
+		wait_ms(20);
+ 254:	84 e1       	ldi	r24, 0x14	; 20
+ 256:	90 e0       	ldi	r25, 0x00	; 0
+ 258:	0e 94 fa 01 	call	0x3f4	; 0x3f4 <wait_ms>
+{
+	UART_str("\n\rINT0_vect\n\r");
+	
+	uint16_t i;
+	
+	for(i=0; i<40; i++){
+ 25c:	21 96       	adiw	r28, 0x01	; 1
+ 25e:	c8 32       	cpi	r28, 0x28	; 40
+ 260:	d1 05       	cpc	r29, r1
+ 262:	c1 f7       	brne	.-16     	; 0x254 <__vector_1+0x32>
+		wait_ms(20);
+	}
+	
+	UART_str("\n\rINT0_vect 1\n\r");
+ 264:	8e e0       	ldi	r24, 0x0E	; 14
+ 266:	91 e0       	ldi	r25, 0x01	; 1
+ 268:	0e 94 ed 01 	call	0x3da	; 0x3da <UART_str>
+	
+	for(i=nowDir.nowByte; i<512; i++){
+ 26c:	c0 91 68 01 	lds	r28, 0x0168
+ 270:	d0 91 69 01 	lds	r29, 0x0169
+ 274:	04 c0       	rjmp	.+8      	; 0x27e <__vector_1+0x5c>
+		sd_byte(0xff);
+ 276:	8f ef       	ldi	r24, 0xFF	; 255
+ 278:	0e 94 10 02 	call	0x420	; 0x420 <sd_byte>
+		wait_ms(20);
+	}
+	
+	UART_str("\n\rINT0_vect 1\n\r");
+	
+	for(i=nowDir.nowByte; i<512; i++){
+ 27c:	21 96       	adiw	r28, 0x01	; 1
+ 27e:	82 e0       	ldi	r24, 0x02	; 2
+ 280:	c0 30       	cpi	r28, 0x00	; 0
+ 282:	d8 07       	cpc	r29, r24
+ 284:	c0 f3       	brcs	.-16     	; 0x276 <__vector_1+0x54>
+		sd_byte(0xff);
+	}
+	SS_PORT  |= (1<<SS);
+ 286:	40 9a       	sbi	0x08, 0	; 8
+	
+	UART_str("\n\rINT0_vect 2\n\r");
+ 288:	8e e1       	ldi	r24, 0x1E	; 30
+ 28a:	91 e0       	ldi	r25, 0x01	; 1
+ 28c:	0e 94 ed 01 	call	0x3da	; 0x3da <UART_str>
+	
+	do{
+			getNextDir(&nowDir);
+ 290:	82 e5       	ldi	r24, 0x52	; 82
+ 292:	91 e0       	ldi	r25, 0x01	; 1
+ 294:	0e 94 5e 04 	call	0x8bc	; 0x8bc <getNextDir>
+	}while(!(nowDir.name[0] != 0xe5 && nowDir.name[0] != 0x05 && 
+		nowDir.extension[0] == 'W' && nowDir.extension[1] == 'A' && nowDir.extension[2] == 'V'));
+ 298:	80 91 52 01 	lds	r24, 0x0152
+ 29c:	85 3e       	cpi	r24, 0xE5	; 229
+ 29e:	c1 f3       	breq	.-16     	; 0x290 <__vector_1+0x6e>
+ 2a0:	85 30       	cpi	r24, 0x05	; 5
+ 2a2:	b1 f3       	breq	.-20     	; 0x290 <__vector_1+0x6e>
+ 2a4:	80 91 5b 01 	lds	r24, 0x015B
+ 2a8:	87 35       	cpi	r24, 0x57	; 87
+ 2aa:	91 f7       	brne	.-28     	; 0x290 <__vector_1+0x6e>
+ 2ac:	80 91 5c 01 	lds	r24, 0x015C
+ 2b0:	81 34       	cpi	r24, 0x41	; 65
+ 2b2:	71 f7       	brne	.-36     	; 0x290 <__vector_1+0x6e>
+ 2b4:	80 91 5d 01 	lds	r24, 0x015D
+ 2b8:	86 35       	cpi	r24, 0x56	; 86
+ 2ba:	51 f7       	brne	.-44     	; 0x290 <__vector_1+0x6e>
+	
+	UART_str("\n\rINT0_vect 3\n\r");
+ 2bc:	8e e2       	ldi	r24, 0x2E	; 46
+ 2be:	91 e0       	ldi	r25, 0x01	; 1
+ 2c0:	0e 94 ed 01 	call	0x3da	; 0x3da <UART_str>
+	
+	SD_openNowDir();
+ 2c4:	0e 94 61 05 	call	0xac2	; 0xac2 <SD_openNowDir>
+	
+	UART_str("\n\rINT0_vect end\n\r");
+ 2c8:	8e e3       	ldi	r24, 0x3E	; 62
+ 2ca:	91 e0       	ldi	r25, 0x01	; 1
+ 2cc:	0e 94 ed 01 	call	0x3da	; 0x3da <UART_str>
+}
+ 2d0:	ff 91       	pop	r31
+ 2d2:	ef 91       	pop	r30
+ 2d4:	df 91       	pop	r29
+ 2d6:	cf 91       	pop	r28
+ 2d8:	bf 91       	pop	r27
+ 2da:	af 91       	pop	r26
+ 2dc:	9f 91       	pop	r25
+ 2de:	8f 91       	pop	r24
+ 2e0:	7f 91       	pop	r23
+ 2e2:	6f 91       	pop	r22
+ 2e4:	5f 91       	pop	r21
+ 2e6:	4f 91       	pop	r20
+ 2e8:	3f 91       	pop	r19
+ 2ea:	2f 91       	pop	r18
+ 2ec:	0f 90       	pop	r0
+ 2ee:	0f be       	out	0x3f, r0	; 63
+ 2f0:	0f 90       	pop	r0
+ 2f2:	1f 90       	pop	r1
+ 2f4:	18 95       	reti
+
+000002f6 <UART_put>:
+ 2f6:	98 2f       	mov	r25, r24
+ 2f8:	80 91 c0 00 	lds	r24, 0x00C0
+ 2fc:	85 ff       	sbrs	r24, 5
+ 2fe:	fc cf       	rjmp	.-8      	; 0x2f8 <UART_put+0x2>
+ 300:	90 93 c6 00 	sts	0x00C6, r25
+ 304:	08 95       	ret
+
+00000306 <UART_rec>:
+ 306:	80 91 c0 00 	lds	r24, 0x00C0
+ 30a:	87 ff       	sbrs	r24, 7
+ 30c:	fc cf       	rjmp	.-8      	; 0x306 <UART_rec>
+ 30e:	80 91 c6 00 	lds	r24, 0x00C6
+ 312:	08 95       	ret
+
+00000314 <UART_init>:
+ 314:	80 e4       	ldi	r24, 0x40	; 64
+ 316:	90 e0       	ldi	r25, 0x00	; 0
+ 318:	90 93 c5 00 	sts	0x00C5, r25
+ 31c:	80 93 c4 00 	sts	0x00C4, r24
+ 320:	88 e1       	ldi	r24, 0x18	; 24
+ 322:	80 93 c1 00 	sts	0x00C1, r24
+ 326:	08 95       	ret
+
+00000328 <UART_sendHEX>:
+ 328:	98 2f       	mov	r25, r24
+ 32a:	92 95       	swap	r25
+ 32c:	9f 70       	andi	r25, 0x0F	; 15
+ 32e:	20 e0       	ldi	r18, 0x00	; 0
+ 330:	f6 e4       	ldi	r31, 0x46	; 70
+ 332:	e5 e4       	ldi	r30, 0x45	; 69
+ 334:	73 e4       	ldi	r23, 0x43	; 67
+ 336:	64 e4       	ldi	r22, 0x44	; 68
+ 338:	51 e4       	ldi	r21, 0x41	; 65
+ 33a:	42 e4       	ldi	r20, 0x42	; 66
+ 33c:	38 2f       	mov	r19, r24
+ 33e:	3f 70       	andi	r19, 0x0F	; 15
+ 340:	9a 30       	cpi	r25, 0x0A	; 10
+ 342:	48 f4       	brcc	.+18     	; 0x356 <UART_sendHEX+0x2e>
+ 344:	80 91 c0 00 	lds	r24, 0x00C0
+ 348:	85 ff       	sbrs	r24, 5
+ 34a:	fc cf       	rjmp	.-8      	; 0x344 <UART_sendHEX+0x1c>
+ 34c:	90 5d       	subi	r25, 0xD0	; 208
+ 34e:	90 93 c6 00 	sts	0x00C6, r25
+ 352:	90 53       	subi	r25, 0x30	; 48
+ 354:	12 c0       	rjmp	.+36     	; 0x37a <UART_sendHEX+0x52>
+ 356:	9a 30       	cpi	r25, 0x0A	; 10
+ 358:	39 f4       	brne	.+14     	; 0x368 <UART_sendHEX+0x40>
+ 35a:	80 91 c0 00 	lds	r24, 0x00C0
+ 35e:	85 ff       	sbrs	r24, 5
+ 360:	fc cf       	rjmp	.-8      	; 0x35a <UART_sendHEX+0x32>
+ 362:	50 93 c6 00 	sts	0x00C6, r21
+ 366:	1b c0       	rjmp	.+54     	; 0x39e <UART_sendHEX+0x76>
+ 368:	9b 30       	cpi	r25, 0x0B	; 11
+ 36a:	39 f4       	brne	.+14     	; 0x37a <UART_sendHEX+0x52>
+ 36c:	80 91 c0 00 	lds	r24, 0x00C0
+ 370:	85 ff       	sbrs	r24, 5
+ 372:	fc cf       	rjmp	.-8      	; 0x36c <UART_sendHEX+0x44>
+ 374:	40 93 c6 00 	sts	0x00C6, r20
+ 378:	1b c0       	rjmp	.+54     	; 0x3b0 <UART_sendHEX+0x88>
+ 37a:	9c 30       	cpi	r25, 0x0C	; 12
+ 37c:	39 f4       	brne	.+14     	; 0x38c <UART_sendHEX+0x64>
+ 37e:	80 91 c0 00 	lds	r24, 0x00C0
+ 382:	85 ff       	sbrs	r24, 5
+ 384:	fc cf       	rjmp	.-8      	; 0x37e <UART_sendHEX+0x56>
+ 386:	70 93 c6 00 	sts	0x00C6, r23
+ 38a:	1a c0       	rjmp	.+52     	; 0x3c0 <UART_sendHEX+0x98>
+ 38c:	9d 30       	cpi	r25, 0x0D	; 13
+ 38e:	39 f4       	brne	.+14     	; 0x39e <UART_sendHEX+0x76>
+ 390:	80 91 c0 00 	lds	r24, 0x00C0
+ 394:	85 ff       	sbrs	r24, 5
+ 396:	fc cf       	rjmp	.-8      	; 0x390 <UART_sendHEX+0x68>
+ 398:	60 93 c6 00 	sts	0x00C6, r22
+ 39c:	11 c0       	rjmp	.+34     	; 0x3c0 <UART_sendHEX+0x98>
+ 39e:	9e 30       	cpi	r25, 0x0E	; 14
+ 3a0:	39 f4       	brne	.+14     	; 0x3b0 <UART_sendHEX+0x88>
+ 3a2:	80 91 c0 00 	lds	r24, 0x00C0
+ 3a6:	85 ff       	sbrs	r24, 5
+ 3a8:	fc cf       	rjmp	.-8      	; 0x3a2 <UART_sendHEX+0x7a>
+ 3aa:	e0 93 c6 00 	sts	0x00C6, r30
+ 3ae:	08 c0       	rjmp	.+16     	; 0x3c0 <UART_sendHEX+0x98>
+ 3b0:	9f 30       	cpi	r25, 0x0F	; 15
+ 3b2:	31 f4       	brne	.+12     	; 0x3c0 <UART_sendHEX+0x98>
+ 3b4:	80 91 c0 00 	lds	r24, 0x00C0
+ 3b8:	85 ff       	sbrs	r24, 5
+ 3ba:	fc cf       	rjmp	.-8      	; 0x3b4 <UART_sendHEX+0x8c>
+ 3bc:	f0 93 c6 00 	sts	0x00C6, r31
+ 3c0:	2f 5f       	subi	r18, 0xFF	; 255
+ 3c2:	22 30       	cpi	r18, 0x02	; 2
+ 3c4:	11 f0       	breq	.+4      	; 0x3ca <UART_sendHEX+0xa2>
+ 3c6:	93 2f       	mov	r25, r19
+ 3c8:	bb cf       	rjmp	.-138    	; 0x340 <UART_sendHEX+0x18>
+ 3ca:	80 91 c0 00 	lds	r24, 0x00C0
+ 3ce:	85 ff       	sbrs	r24, 5
+ 3d0:	fc cf       	rjmp	.-8      	; 0x3ca <UART_sendHEX+0xa2>
+ 3d2:	80 e2       	ldi	r24, 0x20	; 32
+ 3d4:	80 93 c6 00 	sts	0x00C6, r24
+ 3d8:	08 95       	ret
+
+000003da <UART_str>:
+ 3da:	fc 01       	movw	r30, r24
+ 3dc:	07 c0       	rjmp	.+14     	; 0x3ec <UART_str+0x12>
+ 3de:	80 91 c0 00 	lds	r24, 0x00C0
+ 3e2:	85 ff       	sbrs	r24, 5
+ 3e4:	fc cf       	rjmp	.-8      	; 0x3de <UART_str+0x4>
+ 3e6:	90 93 c6 00 	sts	0x00C6, r25
+ 3ea:	31 96       	adiw	r30, 0x01	; 1
+ 3ec:	90 81       	ld	r25, Z
+ 3ee:	99 23       	and	r25, r25
+ 3f0:	b1 f7       	brne	.-20     	; 0x3de <UART_str+0x4>
+ 3f2:	08 95       	ret
+
+000003f4 <wait_ms>:
+extern MASTER_BOOT_RECODE mbr;
+extern BPB_PARAMETER_BLOCK bpb;
+extern DIR_ENTRY nowDir;
+
+void wait_ms(int time_ms)	/*0<a<25*/
+{
+ 3f4:	10 92 b0 00 	sts	0x00B0, r1
+	TCCR2A = 0b00000000;
+	TCCR2B = 0b00000111;	/*	1clk=0.1024ms	*/
+ 3f8:	27 e0       	ldi	r18, 0x07	; 7
+ 3fa:	20 93 b1 00 	sts	0x00B1, r18
+	TCNT2  = 0xff - time_ms*10;
+ 3fe:	26 ef       	ldi	r18, 0xF6	; 246
+ 400:	3f ef       	ldi	r19, 0xFF	; 255
+ 402:	ac 01       	movw	r20, r24
+ 404:	42 9f       	mul	r20, r18
+ 406:	c0 01       	movw	r24, r0
+ 408:	43 9f       	mul	r20, r19
+ 40a:	90 0d       	add	r25, r0
+ 40c:	52 9f       	mul	r21, r18
+ 40e:	90 0d       	add	r25, r0
+ 410:	11 24       	eor	r1, r1
+ 412:	81 50       	subi	r24, 0x01	; 1
+ 414:	80 93 b2 00 	sts	0x00B2, r24
+	TIFR2 |= (1<<TOV2);
+ 418:	b8 9a       	sbi	0x17, 0	; 23
+    while(!(TIFR2 & (1<<TOV2)));
+ 41a:	b8 9b       	sbis	0x17, 0	; 23
+ 41c:	fe cf       	rjmp	.-4      	; 0x41a <wait_ms+0x26>
+}
+ 41e:	08 95       	ret
+
+00000420 <sd_byte>:
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+ 420:	8e bd       	out	0x2e, r24	; 46
+	SPDR = data;
+	while(!(SPSR & (1<<SPIF)));
+ 422:	0d b4       	in	r0, 0x2d	; 45
+ 424:	07 fe       	sbrs	r0, 7
+ 426:	fd cf       	rjmp	.-6      	; 0x422 <sd_byte+0x2>
+	return SPDR;
+ 428:	8e b5       	in	r24, 0x2e	; 46
+} 
+ 42a:	08 95       	ret
+
+0000042c <sd_init>:
+
+void sd_init(void)
+{
+ 42c:	84 b1       	in	r24, 0x04	; 4
+ 42e:	8c 62       	ori	r24, 0x2C	; 44
+ 430:	84 b9       	out	0x04, r24	; 4
+	char ch;
+	
+	SPI_DDR |= ((1<<SCK) | (1<<MOSI) | (1<<2));		//SS(PORTB2)は使わないけど設定しないと動かない
+	SPI_DDR &= ~(1<<MISO);
+ 432:	24 98       	cbi	0x04, 4	; 4
+	SPI_PORT = 0x00;
+ 434:	15 b8       	out	0x05, r1	; 5
+	SS_DDR  |= (1<<SS);
+ 436:	38 9a       	sbi	0x07, 0	; 7
+	SPCR = ((1<<SPE) | (1<<MSTR));
+ 438:	80 e5       	ldi	r24, 0x50	; 80
+ 43a:	8c bd       	out	0x2c, r24	; 44
+	SPSR |= (1<<SPI2X);
+ 43c:	8d b5       	in	r24, 0x2d	; 45
+ 43e:	81 60       	ori	r24, 0x01	; 1
+ 440:	8d bd       	out	0x2d, r24	; 45
+extern BPB_PARAMETER_BLOCK bpb;
+extern DIR_ENTRY nowDir;
+
+void wait_ms(int time_ms)	/*0<a<25*/
+{
+	TCCR2A = 0b00000000;
+ 442:	10 92 b0 00 	sts	0x00B0, r1
+	TCCR2B = 0b00000111;	/*	1clk=0.1024ms	*/
+ 446:	87 e0       	ldi	r24, 0x07	; 7
+ 448:	80 93 b1 00 	sts	0x00B1, r24
+	TCNT2  = 0xff - time_ms*10;
+ 44c:	87 e3       	ldi	r24, 0x37	; 55
+ 44e:	80 93 b2 00 	sts	0x00B2, r24
+	TIFR2 |= (1<<TOV2);
+ 452:	b8 9a       	sbi	0x17, 0	; 23
+    while(!(TIFR2 & (1<<TOV2)));
+ 454:	b8 9b       	sbis	0x17, 0	; 23
+ 456:	fe cf       	rjmp	.-4      	; 0x454 <sd_init+0x28>
+	SPCR = ((1<<SPE) | (1<<MSTR));
+	SPSR |= (1<<SPI2X);
+	wait_ms(20);
+	
+	/*    74クロック送る      */
+	SS_PORT  |= (1<<SS);
+ 458:	40 9a       	sbi	0x08, 0	; 8
+ 45a:	80 e0       	ldi	r24, 0x00	; 0
+	for(char i=0; i<10; i++){
+		SPDR = 0xff;
+ 45c:	9f ef       	ldi	r25, 0xFF	; 255
+ 45e:	9e bd       	out	0x2e, r25	; 46
+		while(!(SPSR & (1<<SPIF)));
+ 460:	0d b4       	in	r0, 0x2d	; 45
+ 462:	07 fe       	sbrs	r0, 7
+ 464:	fd cf       	rjmp	.-6      	; 0x460 <sd_init+0x34>
+	SPSR |= (1<<SPI2X);
+	wait_ms(20);
+	
+	/*    74クロック送る      */
+	SS_PORT  |= (1<<SS);
+	for(char i=0; i<10; i++){
+ 466:	8f 5f       	subi	r24, 0xFF	; 255
+ 468:	8a 30       	cpi	r24, 0x0A	; 10
+ 46a:	c9 f7       	brne	.-14     	; 0x45e <sd_init+0x32>
+		SPDR = 0xff;
+		while(!(SPSR & (1<<SPIF)));
+	}
+	
+	/*	  CMD0      */
+	SS_PORT &= ~(1<<SS);
+ 46c:	40 98       	cbi	0x08, 0	; 8
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 46e:	80 e4       	ldi	r24, 0x40	; 64
+ 470:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 472:	0d b4       	in	r0, 0x2d	; 45
+ 474:	07 fe       	sbrs	r0, 7
+ 476:	fd cf       	rjmp	.-6      	; 0x472 <sd_init+0x46>
+	return SPDR;
+ 478:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 47a:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 47c:	0d b4       	in	r0, 0x2d	; 45
+ 47e:	07 fe       	sbrs	r0, 7
+ 480:	fd cf       	rjmp	.-6      	; 0x47c <sd_init+0x50>
+	return SPDR;
+ 482:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 484:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 486:	0d b4       	in	r0, 0x2d	; 45
+ 488:	07 fe       	sbrs	r0, 7
+ 48a:	fd cf       	rjmp	.-6      	; 0x486 <sd_init+0x5a>
+	return SPDR;
+ 48c:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 48e:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 490:	0d b4       	in	r0, 0x2d	; 45
+ 492:	07 fe       	sbrs	r0, 7
+ 494:	fd cf       	rjmp	.-6      	; 0x490 <sd_init+0x64>
+	return SPDR;
+ 496:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 498:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 49a:	0d b4       	in	r0, 0x2d	; 45
+ 49c:	07 fe       	sbrs	r0, 7
+ 49e:	fd cf       	rjmp	.-6      	; 0x49a <sd_init+0x6e>
+	return SPDR;
+ 4a0:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4a2:	85 e9       	ldi	r24, 0x95	; 149
+ 4a4:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4a6:	0d b4       	in	r0, 0x2d	; 45
+ 4a8:	07 fe       	sbrs	r0, 7
+ 4aa:	fd cf       	rjmp	.-6      	; 0x4a6 <sd_init+0x7a>
+	return SPDR;
+ 4ac:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4ae:	9f ef       	ldi	r25, 0xFF	; 255
+ 4b0:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4b2:	0d b4       	in	r0, 0x2d	; 45
+ 4b4:	07 fe       	sbrs	r0, 7
+ 4b6:	fd cf       	rjmp	.-6      	; 0x4b2 <sd_init+0x86>
+	return SPDR;
+ 4b8:	8e b5       	in	r24, 0x2e	; 46
+	sd_byte(0x00);
+	sd_byte(0x00);
+	sd_byte(0x95);
+	do{
+		ch = sd_byte(0xff);
+	}while(ch != 0x01);
+ 4ba:	81 30       	cpi	r24, 0x01	; 1
+ 4bc:	c9 f7       	brne	.-14     	; 0x4b0 <sd_init+0x84>
+	SS_PORT  |= (1<<SS);
+ 4be:	40 9a       	sbi	0x08, 0	; 8
+		}
+		if(ch == 0x00)	break;
+	}
+	SS_PORT  |= (1<<SS);*/
+	/*     ACMD41     */
+	SS_PORT &= ~(1<<SS);
+ 4c0:	40 98       	cbi	0x08, 0	; 8
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4c2:	87 e7       	ldi	r24, 0x77	; 119
+ 4c4:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4c6:	0d b4       	in	r0, 0x2d	; 45
+ 4c8:	07 fe       	sbrs	r0, 7
+ 4ca:	fd cf       	rjmp	.-6      	; 0x4c6 <sd_init+0x9a>
+	return SPDR;
+ 4cc:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4ce:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4d0:	0d b4       	in	r0, 0x2d	; 45
+ 4d2:	07 fe       	sbrs	r0, 7
+ 4d4:	fd cf       	rjmp	.-6      	; 0x4d0 <sd_init+0xa4>
+	return SPDR;
+ 4d6:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4d8:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4da:	0d b4       	in	r0, 0x2d	; 45
+ 4dc:	07 fe       	sbrs	r0, 7
+ 4de:	fd cf       	rjmp	.-6      	; 0x4da <sd_init+0xae>
+	return SPDR;
+ 4e0:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4e2:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4e4:	0d b4       	in	r0, 0x2d	; 45
+ 4e6:	07 fe       	sbrs	r0, 7
+ 4e8:	fd cf       	rjmp	.-6      	; 0x4e4 <sd_init+0xb8>
+	return SPDR;
+ 4ea:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4ec:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4ee:	0d b4       	in	r0, 0x2d	; 45
+ 4f0:	07 fe       	sbrs	r0, 7
+ 4f2:	fd cf       	rjmp	.-6      	; 0x4ee <sd_init+0xc2>
+	return SPDR;
+ 4f4:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 4f6:	85 e9       	ldi	r24, 0x95	; 149
+ 4f8:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 4fa:	0d b4       	in	r0, 0x2d	; 45
+ 4fc:	07 fe       	sbrs	r0, 7
+ 4fe:	fd cf       	rjmp	.-6      	; 0x4fa <sd_init+0xce>
+	return SPDR;
+ 500:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 502:	8f ef       	ldi	r24, 0xFF	; 255
+ 504:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 506:	0d b4       	in	r0, 0x2d	; 45
+ 508:	07 fe       	sbrs	r0, 7
+ 50a:	fd cf       	rjmp	.-6      	; 0x506 <__stack+0x7>
+ 50c:	04 c0       	rjmp	.+8      	; 0x516 <__stack+0x17>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 50e:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 510:	0d b4       	in	r0, 0x2d	; 45
+ 512:	07 fe       	sbrs	r0, 7
+ 514:	fd cf       	rjmp	.-6      	; 0x510 <__stack+0x11>
+	return SPDR;
+ 516:	8e b5       	in	r24, 0x2e	; 46
+		sd_byte(0x00);
+		sd_byte(0x00);
+		sd_byte(0x00);
+		sd_byte(0x95);
+		ch = sd_byte(0xff);
+		while(ch == 0xff){
+ 518:	8f 3f       	cpi	r24, 0xFF	; 255
+ 51a:	c9 f3       	breq	.-14     	; 0x50e <__stack+0xf>
+			ch = sd_byte(0xff);
+		}
+		break;
+	}
+	SS_PORT  |= (1<<SS);
+ 51c:	40 9a       	sbi	0x08, 0	; 8
+	
+	SS_PORT &= ~(1<<SS);
+ 51e:	40 98       	cbi	0x08, 0	; 8
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 520:	89 e6       	ldi	r24, 0x69	; 105
+ 522:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 524:	0d b4       	in	r0, 0x2d	; 45
+ 526:	07 fe       	sbrs	r0, 7
+ 528:	fd cf       	rjmp	.-6      	; 0x524 <__stack+0x25>
+	return SPDR;
+ 52a:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 52c:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 52e:	0d b4       	in	r0, 0x2d	; 45
+ 530:	07 fe       	sbrs	r0, 7
+ 532:	fd cf       	rjmp	.-6      	; 0x52e <__stack+0x2f>
+	return SPDR;
+ 534:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 536:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 538:	0d b4       	in	r0, 0x2d	; 45
+ 53a:	07 fe       	sbrs	r0, 7
+ 53c:	fd cf       	rjmp	.-6      	; 0x538 <__stack+0x39>
+	return SPDR;
+ 53e:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 540:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 542:	0d b4       	in	r0, 0x2d	; 45
+ 544:	07 fe       	sbrs	r0, 7
+ 546:	fd cf       	rjmp	.-6      	; 0x542 <__stack+0x43>
+	return SPDR;
+ 548:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 54a:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 54c:	0d b4       	in	r0, 0x2d	; 45
+ 54e:	07 fe       	sbrs	r0, 7
+ 550:	fd cf       	rjmp	.-6      	; 0x54c <__stack+0x4d>
+	return SPDR;
+ 552:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 554:	85 e9       	ldi	r24, 0x95	; 149
+ 556:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 558:	0d b4       	in	r0, 0x2d	; 45
+ 55a:	07 fe       	sbrs	r0, 7
+ 55c:	fd cf       	rjmp	.-6      	; 0x558 <__stack+0x59>
+	return SPDR;
+ 55e:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 560:	8f ef       	ldi	r24, 0xFF	; 255
+ 562:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 564:	0d b4       	in	r0, 0x2d	; 45
+ 566:	07 fe       	sbrs	r0, 7
+ 568:	fd cf       	rjmp	.-6      	; 0x564 <__stack+0x65>
+ 56a:	04 c0       	rjmp	.+8      	; 0x574 <__stack+0x75>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 56c:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 56e:	0d b4       	in	r0, 0x2d	; 45
+ 570:	07 fe       	sbrs	r0, 7
+ 572:	fd cf       	rjmp	.-6      	; 0x56e <__stack+0x6f>
+	return SPDR;
+ 574:	8e b5       	in	r24, 0x2e	; 46
+		sd_byte(0x00);
+		sd_byte(0x00);
+		sd_byte(0x00);
+		sd_byte(0x95);
+		ch = sd_byte(0xff);
+		while(ch == 0xff){
+ 576:	8f 3f       	cpi	r24, 0xFF	; 255
+ 578:	c9 f3       	breq	.-14     	; 0x56c <__stack+0x6d>
+			ch = sd_byte(0xff);
+		}
+		break;
+	}
+	SS_PORT  |= (1<<SS);
+ 57a:	40 9a       	sbi	0x08, 0	; 8
+}
+ 57c:	08 95       	ret
+
+0000057e <SD_openSector>:
+
+void SD_openSector(uint32_t arg)
+{
+ 57e:	9b 01       	movw	r18, r22
+ 580:	ac 01       	movw	r20, r24
+	arg *= 512;	//arg = arg<<7;
+ 582:	79 e0       	ldi	r23, 0x09	; 9
+ 584:	22 0f       	add	r18, r18
+ 586:	33 1f       	adc	r19, r19
+ 588:	44 1f       	adc	r20, r20
+ 58a:	55 1f       	adc	r21, r21
+ 58c:	7a 95       	dec	r23
+ 58e:	d1 f7       	brne	.-12     	; 0x584 <SD_openSector+0x6>
+	
+	/*    CMD17     */
+	SS_PORT &= ~(1<<SS);
+ 590:	40 98       	cbi	0x08, 0	; 8
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 592:	81 e5       	ldi	r24, 0x51	; 81
+ 594:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 596:	0d b4       	in	r0, 0x2d	; 45
+ 598:	07 fe       	sbrs	r0, 7
+ 59a:	fd cf       	rjmp	.-6      	; 0x596 <SD_openSector+0x18>
+	return SPDR;
+ 59c:	8e b5       	in	r24, 0x2e	; 46
+	arg *= 512;	//arg = arg<<7;
+	
+	/*    CMD17     */
+	SS_PORT &= ~(1<<SS);
+	sd_byte(0x51);
+	sd_byte((uint8_t)(arg>>24));
+ 59e:	85 2f       	mov	r24, r21
+ 5a0:	99 27       	eor	r25, r25
+ 5a2:	aa 27       	eor	r26, r26
+ 5a4:	bb 27       	eor	r27, r27
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5a6:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5a8:	0d b4       	in	r0, 0x2d	; 45
+ 5aa:	07 fe       	sbrs	r0, 7
+ 5ac:	fd cf       	rjmp	.-6      	; 0x5a8 <SD_openSector+0x2a>
+	return SPDR;
+ 5ae:	8e b5       	in	r24, 0x2e	; 46
+	
+	/*    CMD17     */
+	SS_PORT &= ~(1<<SS);
+	sd_byte(0x51);
+	sd_byte((uint8_t)(arg>>24));
+	sd_byte((uint8_t)(arg>>16));
+ 5b0:	ca 01       	movw	r24, r20
+ 5b2:	aa 27       	eor	r26, r26
+ 5b4:	bb 27       	eor	r27, r27
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5b6:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5b8:	0d b4       	in	r0, 0x2d	; 45
+ 5ba:	07 fe       	sbrs	r0, 7
+ 5bc:	fd cf       	rjmp	.-6      	; 0x5b8 <SD_openSector+0x3a>
+	return SPDR;
+ 5be:	8e b5       	in	r24, 0x2e	; 46
+	/*    CMD17     */
+	SS_PORT &= ~(1<<SS);
+	sd_byte(0x51);
+	sd_byte((uint8_t)(arg>>24));
+	sd_byte((uint8_t)(arg>>16));
+	sd_byte((uint8_t)(arg>>8));
+ 5c0:	bb 27       	eor	r27, r27
+ 5c2:	a5 2f       	mov	r26, r21
+ 5c4:	94 2f       	mov	r25, r20
+ 5c6:	83 2f       	mov	r24, r19
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5c8:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5ca:	0d b4       	in	r0, 0x2d	; 45
+ 5cc:	07 fe       	sbrs	r0, 7
+ 5ce:	fd cf       	rjmp	.-6      	; 0x5ca <SD_openSector+0x4c>
+	return SPDR;
+ 5d0:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5d2:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5d4:	0d b4       	in	r0, 0x2d	; 45
+ 5d6:	07 fe       	sbrs	r0, 7
+ 5d8:	fd cf       	rjmp	.-6      	; 0x5d4 <SD_openSector+0x56>
+	return SPDR;
+ 5da:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5dc:	81 e0       	ldi	r24, 0x01	; 1
+ 5de:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5e0:	0d b4       	in	r0, 0x2d	; 45
+ 5e2:	07 fe       	sbrs	r0, 7
+ 5e4:	fd cf       	rjmp	.-6      	; 0x5e0 <SD_openSector+0x62>
+	return SPDR;
+ 5e6:	8e b5       	in	r24, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5e8:	9f ef       	ldi	r25, 0xFF	; 255
+ 5ea:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5ec:	0d b4       	in	r0, 0x2d	; 45
+ 5ee:	07 fe       	sbrs	r0, 7
+ 5f0:	fd cf       	rjmp	.-6      	; 0x5ec <SD_openSector+0x6e>
+	return SPDR;
+ 5f2:	8e b5       	in	r24, 0x2e	; 46
+	sd_byte((uint8_t)(arg>>16));
+	sd_byte((uint8_t)(arg>>8));
+	sd_byte((uint8_t)arg);
+	sd_byte(0x01);
+	
+	while(sd_byte(0xff) != 0x00);
+ 5f4:	88 23       	and	r24, r24
+ 5f6:	c9 f7       	brne	.-14     	; 0x5ea <SD_openSector+0x6c>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 5f8:	9f ef       	ldi	r25, 0xFF	; 255
+ 5fa:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 5fc:	0d b4       	in	r0, 0x2d	; 45
+ 5fe:	07 fe       	sbrs	r0, 7
+ 600:	fd cf       	rjmp	.-6      	; 0x5fc <SD_openSector+0x7e>
+	return SPDR;
+ 602:	8e b5       	in	r24, 0x2e	; 46
+	sd_byte((uint8_t)arg);
+	sd_byte(0x01);
+	
+	while(sd_byte(0xff) != 0x00);
+	
+	while(sd_byte(0xff) != 0xfe);
+ 604:	8e 3f       	cpi	r24, 0xFE	; 254
+ 606:	c9 f7       	brne	.-14     	; 0x5fa <SD_openSector+0x7c>
+}
+ 608:	08 95       	ret
+
+0000060a <SD_readMRB>:
+
+char SD_readMRB(void)
+{
+ 60a:	60 e0       	ldi	r22, 0x00	; 0
+ 60c:	70 e0       	ldi	r23, 0x00	; 0
+ 60e:	80 e0       	ldi	r24, 0x00	; 0
+ 610:	90 e0       	ldi	r25, 0x00	; 0
+ 612:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+ 616:	80 e0       	ldi	r24, 0x00	; 0
+ 618:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 61a:	2f ef       	ldi	r18, 0xFF	; 255
+ 61c:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 61e:	0d b4       	in	r0, 0x2d	; 45
+ 620:	07 fe       	sbrs	r0, 7
+ 622:	fd cf       	rjmp	.-6      	; 0x61e <SD_readMRB+0x14>
+	return SPDR;
+ 624:	3e b5       	in	r19, 0x2e	; 46
+	uint16_t i;
+	uint32_t a;
+
+	SD_openSector(0x00000000);
+	
+	for(i=0; i<446; i++)
+ 626:	01 96       	adiw	r24, 0x01	; 1
+ 628:	31 e0       	ldi	r19, 0x01	; 1
+ 62a:	8e 3b       	cpi	r24, 0xBE	; 190
+ 62c:	93 07       	cpc	r25, r19
+ 62e:	b1 f7       	brne	.-20     	; 0x61c <SD_readMRB+0x12>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 630:	8f ef       	ldi	r24, 0xFF	; 255
+ 632:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 634:	0d b4       	in	r0, 0x2d	; 45
+ 636:	07 fe       	sbrs	r0, 7
+ 638:	fd cf       	rjmp	.-6      	; 0x634 <SD_readMRB+0x2a>
+	return SPDR;
+ 63a:	8e b5       	in	r24, 0x2e	; 46
+ 63c:	80 e0       	ldi	r24, 0x00	; 0
+ 63e:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 640:	2f ef       	ldi	r18, 0xFF	; 255
+ 642:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 644:	0d b4       	in	r0, 0x2d	; 45
+ 646:	07 fe       	sbrs	r0, 7
+ 648:	fd cf       	rjmp	.-6      	; 0x644 <SD_readMRB+0x3a>
+	return SPDR;
+ 64a:	3e b5       	in	r19, 0x2e	; 46
+	for(i=0; i<446; i++)
+		sd_byte(0xff);
+	
+	sd_byte(0xff);	/* 0x80: bootable device, 0x00: non-bootable */
+	
+	for(i=0; i<3; i++)
+ 64c:	01 96       	adiw	r24, 0x01	; 1
+ 64e:	83 30       	cpi	r24, 0x03	; 3
+ 650:	91 05       	cpc	r25, r1
+ 652:	b9 f7       	brne	.-18     	; 0x642 <SD_readMRB+0x38>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 654:	8f ef       	ldi	r24, 0xFF	; 255
+ 656:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 658:	0d b4       	in	r0, 0x2d	; 45
+ 65a:	07 fe       	sbrs	r0, 7
+ 65c:	fd cf       	rjmp	.-6      	; 0x658 <SD_readMRB+0x4e>
+	return SPDR;
+ 65e:	8e b5       	in	r24, 0x2e	; 46
+	sd_byte(0xff);	/* 0x80: bootable device, 0x00: non-bootable */
+	
+	for(i=0; i<3; i++)
+		sd_byte(0xff);
+	
+	mbr.fileSystemDescriptor = sd_byte(0xff);
+ 660:	80 93 6c 01 	sts	0x016C, r24
+	if(mbr.fileSystemDescriptor != 0x04 && mbr.fileSystemDescriptor != 0x06){
+ 664:	84 30       	cpi	r24, 0x04	; 4
+ 666:	21 f0       	breq	.+8      	; 0x670 <SD_readMRB+0x66>
+ 668:	86 30       	cpi	r24, 0x06	; 6
+ 66a:	11 f0       	breq	.+4      	; 0x670 <SD_readMRB+0x66>
+ 66c:	80 e0       	ldi	r24, 0x00	; 0
+ 66e:	08 95       	ret
+ 670:	80 e0       	ldi	r24, 0x00	; 0
+ 672:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 674:	2f ef       	ldi	r18, 0xFF	; 255
+ 676:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 678:	0d b4       	in	r0, 0x2d	; 45
+ 67a:	07 fe       	sbrs	r0, 7
+ 67c:	fd cf       	rjmp	.-6      	; 0x678 <SD_readMRB+0x6e>
+	return SPDR;
+ 67e:	3e b5       	in	r19, 0x2e	; 46
+	mbr.fileSystemDescriptor = sd_byte(0xff);
+	if(mbr.fileSystemDescriptor != 0x04 && mbr.fileSystemDescriptor != 0x06){
+		return SD_FAILED;
+	}	
+	
+	for(i=0; i<3; i++){
+ 680:	01 96       	adiw	r24, 0x01	; 1
+ 682:	83 30       	cpi	r24, 0x03	; 3
+ 684:	91 05       	cpc	r25, r1
+ 686:	b9 f7       	brne	.-18     	; 0x676 <SD_readMRB+0x6c>
+ 688:	20 e0       	ldi	r18, 0x00	; 0
+ 68a:	30 e0       	ldi	r19, 0x00	; 0
+ 68c:	40 e0       	ldi	r20, 0x00	; 0
+ 68e:	50 e0       	ldi	r21, 0x00	; 0
+ 690:	60 e0       	ldi	r22, 0x00	; 0
+ 692:	70 e0       	ldi	r23, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 694:	ef ef       	ldi	r30, 0xFF	; 255
+ 696:	ee bd       	out	0x2e, r30	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 698:	0d b4       	in	r0, 0x2d	; 45
+ 69a:	07 fe       	sbrs	r0, 7
+ 69c:	fd cf       	rjmp	.-6      	; 0x698 <SD_readMRB+0x8e>
+	return SPDR;
+ 69e:	8e b5       	in	r24, 0x2e	; 46
+	}
+	
+	mbr.firstSectorNumbers = 0;
+	for(i=0; i<4; i++){
+		a = sd_byte(0xff);
+		mbr.firstSectorNumbers |= a<<(8*i);
+ 6a0:	90 e0       	ldi	r25, 0x00	; 0
+ 6a2:	a0 e0       	ldi	r26, 0x00	; 0
+ 6a4:	b0 e0       	ldi	r27, 0x00	; 0
+ 6a6:	06 2e       	mov	r0, r22
+ 6a8:	04 c0       	rjmp	.+8      	; 0x6b2 <SD_readMRB+0xa8>
+ 6aa:	88 0f       	add	r24, r24
+ 6ac:	99 1f       	adc	r25, r25
+ 6ae:	aa 1f       	adc	r26, r26
+ 6b0:	bb 1f       	adc	r27, r27
+ 6b2:	0a 94       	dec	r0
+ 6b4:	d2 f7       	brpl	.-12     	; 0x6aa <SD_readMRB+0xa0>
+ 6b6:	28 2b       	or	r18, r24
+ 6b8:	39 2b       	or	r19, r25
+ 6ba:	4a 2b       	or	r20, r26
+ 6bc:	5b 2b       	or	r21, r27
+ 6be:	68 5f       	subi	r22, 0xF8	; 248
+ 6c0:	7f 4f       	sbci	r23, 0xFF	; 255
+	for(i=0; i<3; i++){
+		sd_byte(0xff);
+	}
+	
+	mbr.firstSectorNumbers = 0;
+	for(i=0; i<4; i++){
+ 6c2:	60 32       	cpi	r22, 0x20	; 32
+ 6c4:	71 05       	cpc	r23, r1
+ 6c6:	39 f7       	brne	.-50     	; 0x696 <SD_readMRB+0x8c>
+ 6c8:	20 93 6d 01 	sts	0x016D, r18
+ 6cc:	30 93 6e 01 	sts	0x016E, r19
+ 6d0:	40 93 6f 01 	sts	0x016F, r20
+ 6d4:	50 93 70 01 	sts	0x0170, r21
+ 6d8:	20 e0       	ldi	r18, 0x00	; 0
+ 6da:	30 e0       	ldi	r19, 0x00	; 0
+ 6dc:	40 e0       	ldi	r20, 0x00	; 0
+ 6de:	50 e0       	ldi	r21, 0x00	; 0
+ 6e0:	60 e0       	ldi	r22, 0x00	; 0
+ 6e2:	70 e0       	ldi	r23, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 6e4:	ef ef       	ldi	r30, 0xFF	; 255
+ 6e6:	ee bd       	out	0x2e, r30	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 6e8:	0d b4       	in	r0, 0x2d	; 45
+ 6ea:	07 fe       	sbrs	r0, 7
+ 6ec:	fd cf       	rjmp	.-6      	; 0x6e8 <SD_readMRB+0xde>
+	return SPDR;
+ 6ee:	8e b5       	in	r24, 0x2e	; 46
+	}
+	
+	mbr.numberOfSectors = 0;
+	for(i=0; i<3; i++){
+		a = sd_byte(0xff);
+		mbr.numberOfSectors |= a<<8*i;
+ 6f0:	90 e0       	ldi	r25, 0x00	; 0
+ 6f2:	a0 e0       	ldi	r26, 0x00	; 0
+ 6f4:	b0 e0       	ldi	r27, 0x00	; 0
+ 6f6:	06 2e       	mov	r0, r22
+ 6f8:	04 c0       	rjmp	.+8      	; 0x702 <SD_readMRB+0xf8>
+ 6fa:	88 0f       	add	r24, r24
+ 6fc:	99 1f       	adc	r25, r25
+ 6fe:	aa 1f       	adc	r26, r26
+ 700:	bb 1f       	adc	r27, r27
+ 702:	0a 94       	dec	r0
+ 704:	d2 f7       	brpl	.-12     	; 0x6fa <SD_readMRB+0xf0>
+ 706:	28 2b       	or	r18, r24
+ 708:	39 2b       	or	r19, r25
+ 70a:	4a 2b       	or	r20, r26
+ 70c:	5b 2b       	or	r21, r27
+ 70e:	68 5f       	subi	r22, 0xF8	; 248
+ 710:	7f 4f       	sbci	r23, 0xFF	; 255
+		a = sd_byte(0xff);
+		mbr.firstSectorNumbers |= a<<(8*i);
+	}
+	
+	mbr.numberOfSectors = 0;
+	for(i=0; i<3; i++){
+ 712:	68 31       	cpi	r22, 0x18	; 24
+ 714:	71 05       	cpc	r23, r1
+ 716:	39 f7       	brne	.-50     	; 0x6e6 <SD_readMRB+0xdc>
+ 718:	20 93 71 01 	sts	0x0171, r18
+ 71c:	30 93 72 01 	sts	0x0172, r19
+ 720:	40 93 73 01 	sts	0x0173, r20
+ 724:	50 93 74 01 	sts	0x0174, r21
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 728:	9f ef       	ldi	r25, 0xFF	; 255
+ 72a:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 72c:	0d b4       	in	r0, 0x2d	; 45
+ 72e:	07 fe       	sbrs	r0, 7
+ 730:	fd cf       	rjmp	.-6      	; 0x72c <SD_readMRB+0x122>
+	return SPDR;
+ 732:	8e b5       	in	r24, 0x2e	; 46
+	for(i=0; i<3; i++){
+		a = sd_byte(0xff);
+		mbr.numberOfSectors |= a<<8*i;
+	}
+	
+	while(0x55 != sd_byte(0xff));
+ 734:	85 35       	cpi	r24, 0x55	; 85
+ 736:	c9 f7       	brne	.-14     	; 0x72a <SD_readMRB+0x120>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 738:	9f ef       	ldi	r25, 0xFF	; 255
+ 73a:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 73c:	0d b4       	in	r0, 0x2d	; 45
+ 73e:	07 fe       	sbrs	r0, 7
+ 740:	fd cf       	rjmp	.-6      	; 0x73c <SD_readMRB+0x132>
+	return SPDR;
+ 742:	8e b5       	in	r24, 0x2e	; 46
+		a = sd_byte(0xff);
+		mbr.numberOfSectors |= a<<8*i;
+	}
+	
+	while(0x55 != sd_byte(0xff));
+	while(0xaa != sd_byte(0xff));
+ 744:	8a 3a       	cpi	r24, 0xAA	; 170
+ 746:	c9 f7       	brne	.-14     	; 0x73a <SD_readMRB+0x130>
+	
+	SS_PORT  |= (1<<SS);
+ 748:	40 9a       	sbi	0x08, 0	; 8
+ 74a:	81 e0       	ldi	r24, 0x01	; 1
+	return SD_OK;
+}
+ 74c:	08 95       	ret
+
+0000074e <SD_readBPB>:
+
+char SD_readBPB(void)
+{
+ 74e:	60 91 6d 01 	lds	r22, 0x016D
+ 752:	70 91 6e 01 	lds	r23, 0x016E
+ 756:	80 91 6f 01 	lds	r24, 0x016F
+ 75a:	90 91 70 01 	lds	r25, 0x0170
+ 75e:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+ 762:	80 e0       	ldi	r24, 0x00	; 0
+ 764:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 766:	2f ef       	ldi	r18, 0xFF	; 255
+ 768:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 76a:	0d b4       	in	r0, 0x2d	; 45
+ 76c:	07 fe       	sbrs	r0, 7
+ 76e:	fd cf       	rjmp	.-6      	; 0x76a <SD_readBPB+0x1c>
+	return SPDR;
+ 770:	3e b5       	in	r19, 0x2e	; 46
+{
+	uint16_t i;
+	//uint8_t j;
+	SD_openSector(mbr.firstSectorNumbers);
+	
+	for(i=0; i<11; i++)
+ 772:	01 96       	adiw	r24, 0x01	; 1
+ 774:	8b 30       	cpi	r24, 0x0B	; 11
+ 776:	91 05       	cpc	r25, r1
+ 778:	b9 f7       	brne	.-18     	; 0x768 <SD_readBPB+0x1a>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 77a:	8f ef       	ldi	r24, 0xFF	; 255
+ 77c:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 77e:	0d b4       	in	r0, 0x2d	; 45
+ 780:	07 fe       	sbrs	r0, 7
+ 782:	fd cf       	rjmp	.-6      	; 0x77e <SD_readBPB+0x30>
+	return SPDR;
+ 784:	3e b5       	in	r19, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 786:	8f ef       	ldi	r24, 0xFF	; 255
+ 788:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 78a:	0d b4       	in	r0, 0x2d	; 45
+ 78c:	07 fe       	sbrs	r0, 7
+ 78e:	fd cf       	rjmp	.-6      	; 0x78a <SD_readBPB+0x3c>
+	return SPDR;
+ 790:	2e b5       	in	r18, 0x2e	; 46
+	for(i=0; i<11; i++)
+		sd_byte(0xff);
+	
+	bpb.bytesPerSector = sd_byte(0xff);
+	i = sd_byte(0xff);
+	bpb. bytesPerSector |=  i<<8;
+ 792:	92 2f       	mov	r25, r18
+ 794:	80 e0       	ldi	r24, 0x00	; 0
+ 796:	23 2f       	mov	r18, r19
+ 798:	30 e0       	ldi	r19, 0x00	; 0
+ 79a:	82 2b       	or	r24, r18
+ 79c:	93 2b       	or	r25, r19
+ 79e:	90 93 76 01 	sts	0x0176, r25
+ 7a2:	80 93 75 01 	sts	0x0175, r24
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 7a6:	8f ef       	ldi	r24, 0xFF	; 255
+ 7a8:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 7aa:	0d b4       	in	r0, 0x2d	; 45
+ 7ac:	07 fe       	sbrs	r0, 7
+ 7ae:	fd cf       	rjmp	.-6      	; 0x7aa <SD_readBPB+0x5c>
+	return SPDR;
+ 7b0:	8e b5       	in	r24, 0x2e	; 46
+	i = sd_byte(0xff);
+	bpb. bytesPerSector |=  i<<8;
+	//if(bpb.bytesPerSector == 512)
+	// 	;
+	
+	bpb.sectorsPerCluster = sd_byte(0xff);
+ 7b2:	80 93 77 01 	sts	0x0177, r24
+ 7b6:	80 e0       	ldi	r24, 0x00	; 0
+ 7b8:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 7ba:	2f ef       	ldi	r18, 0xFF	; 255
+ 7bc:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 7be:	0d b4       	in	r0, 0x2d	; 45
+ 7c0:	07 fe       	sbrs	r0, 7
+ 7c2:	fd cf       	rjmp	.-6      	; 0x7be <SD_readBPB+0x70>
+	return SPDR;
+ 7c4:	3e b5       	in	r19, 0x2e	; 46
+	//if(bpb.bytesPerSector == 512)
+	// 	;
+	
+	bpb.sectorsPerCluster = sd_byte(0xff);
+	
+	for(i=0; i<8; i++)
+ 7c6:	01 96       	adiw	r24, 0x01	; 1
+ 7c8:	88 30       	cpi	r24, 0x08	; 8
+ 7ca:	91 05       	cpc	r25, r1
+ 7cc:	b9 f7       	brne	.-18     	; 0x7bc <SD_readBPB+0x6e>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 7ce:	8f ef       	ldi	r24, 0xFF	; 255
+ 7d0:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 7d2:	0d b4       	in	r0, 0x2d	; 45
+ 7d4:	07 fe       	sbrs	r0, 7
+ 7d6:	fd cf       	rjmp	.-6      	; 0x7d2 <SD_readBPB+0x84>
+	return SPDR;
+ 7d8:	9e b5       	in	r25, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 7da:	8f ef       	ldi	r24, 0xFF	; 255
+ 7dc:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 7de:	0d b4       	in	r0, 0x2d	; 45
+ 7e0:	07 fe       	sbrs	r0, 7
+ 7e2:	fd cf       	rjmp	.-6      	; 0x7de <SD_readBPB+0x90>
+	return SPDR;
+ 7e4:	8e b5       	in	r24, 0x2e	; 46
+	for(i=0; i<8; i++)
+		sd_byte(0xff);
+	
+	bpb.sectorsPerFAT = sd_byte(0xff);
+	i = sd_byte(0xff);
+	bpb. sectorsPerFAT |=  i<<8;
+ 7e6:	38 2f       	mov	r19, r24
+ 7e8:	20 e0       	ldi	r18, 0x00	; 0
+ 7ea:	89 2f       	mov	r24, r25
+ 7ec:	90 e0       	ldi	r25, 0x00	; 0
+ 7ee:	28 2b       	or	r18, r24
+ 7f0:	39 2b       	or	r19, r25
+ 7f2:	30 93 79 01 	sts	0x0179, r19
+ 7f6:	20 93 78 01 	sts	0x0178, r18
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 7fa:	9f ef       	ldi	r25, 0xFF	; 255
+ 7fc:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 7fe:	0d b4       	in	r0, 0x2d	; 45
+ 800:	07 fe       	sbrs	r0, 7
+ 802:	fd cf       	rjmp	.-6      	; 0x7fe <SD_readBPB+0xb0>
+	return SPDR;
+ 804:	8e b5       	in	r24, 0x2e	; 46
+	
+	bpb.sectorsPerFAT = sd_byte(0xff);
+	i = sd_byte(0xff);
+	bpb. sectorsPerFAT |=  i<<8;
+	
+	while(0x55 != sd_byte(0xff));
+ 806:	85 35       	cpi	r24, 0x55	; 85
+ 808:	c9 f7       	brne	.-14     	; 0x7fc <SD_readBPB+0xae>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 80a:	9f ef       	ldi	r25, 0xFF	; 255
+ 80c:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 80e:	0d b4       	in	r0, 0x2d	; 45
+ 810:	07 fe       	sbrs	r0, 7
+ 812:	fd cf       	rjmp	.-6      	; 0x80e <SD_readBPB+0xc0>
+	return SPDR;
+ 814:	8e b5       	in	r24, 0x2e	; 46
+	bpb.sectorsPerFAT = sd_byte(0xff);
+	i = sd_byte(0xff);
+	bpb. sectorsPerFAT |=  i<<8;
+	
+	while(0x55 != sd_byte(0xff));
+	while(0xaa != sd_byte(0xff));
+ 816:	8a 3a       	cpi	r24, 0xAA	; 170
+ 818:	c9 f7       	brne	.-14     	; 0x80c <SD_readBPB+0xbe>
+	
+	SS_PORT  |= (1<<SS);
+ 81a:	40 9a       	sbi	0x08, 0	; 8
+	return SD_OK;
+}
+ 81c:	81 e0       	ldi	r24, 0x01	; 1
+ 81e:	08 95       	ret
+
+00000820 <getnextcluster>:
+
+uint16_t getnextcluster(uint16_t cluster/*,uint32_t firstSectorNumbers,uint8_t sectorsPerCluster*/)
+{
+ 820:	0f 93       	push	r16
+ 822:	1f 93       	push	r17
+ 824:	8c 01       	movw	r16, r24
+	uint16_t i;
+	uint16_t res;
+	SD_openSector(mbr.firstSectorNumbers+1+cluster/256);
+ 826:	60 91 6d 01 	lds	r22, 0x016D
+ 82a:	70 91 6e 01 	lds	r23, 0x016E
+ 82e:	80 91 6f 01 	lds	r24, 0x016F
+ 832:	90 91 70 01 	lds	r25, 0x0170
+ 836:	6f 5f       	subi	r22, 0xFF	; 255
+ 838:	7f 4f       	sbci	r23, 0xFF	; 255
+ 83a:	8f 4f       	sbci	r24, 0xFF	; 255
+ 83c:	9f 4f       	sbci	r25, 0xFF	; 255
+ 83e:	21 2f       	mov	r18, r17
+ 840:	33 27       	eor	r19, r19
+ 842:	40 e0       	ldi	r20, 0x00	; 0
+ 844:	50 e0       	ldi	r21, 0x00	; 0
+ 846:	62 0f       	add	r22, r18
+ 848:	73 1f       	adc	r23, r19
+ 84a:	84 1f       	adc	r24, r20
+ 84c:	95 1f       	adc	r25, r21
+ 84e:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+	
+	cluster %= 256;
+	for(i=0; i<cluster*2; i++){
+ 852:	a8 01       	movw	r20, r16
+ 854:	50 70       	andi	r21, 0x00	; 0
+ 856:	44 0f       	add	r20, r20
+ 858:	55 1f       	adc	r21, r21
+ 85a:	80 e0       	ldi	r24, 0x00	; 0
+ 85c:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 85e:	2f ef       	ldi	r18, 0xFF	; 255
+ 860:	06 c0       	rjmp	.+12     	; 0x86e <getnextcluster+0x4e>
+ 862:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 864:	0d b4       	in	r0, 0x2d	; 45
+ 866:	07 fe       	sbrs	r0, 7
+ 868:	fd cf       	rjmp	.-6      	; 0x864 <getnextcluster+0x44>
+	return SPDR;
+ 86a:	3e b5       	in	r19, 0x2e	; 46
+	uint16_t i;
+	uint16_t res;
+	SD_openSector(mbr.firstSectorNumbers+1+cluster/256);
+	
+	cluster %= 256;
+	for(i=0; i<cluster*2; i++){
+ 86c:	01 96       	adiw	r24, 0x01	; 1
+ 86e:	84 17       	cp	r24, r20
+ 870:	95 07       	cpc	r25, r21
+ 872:	b8 f3       	brcs	.-18     	; 0x862 <getnextcluster+0x42>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 874:	8f ef       	ldi	r24, 0xFF	; 255
+ 876:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 878:	0d b4       	in	r0, 0x2d	; 45
+ 87a:	07 fe       	sbrs	r0, 7
+ 87c:	fd cf       	rjmp	.-6      	; 0x878 <getnextcluster+0x58>
+	return SPDR;
+ 87e:	2e b5       	in	r18, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 880:	8f ef       	ldi	r24, 0xFF	; 255
+ 882:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 884:	0d b4       	in	r0, 0x2d	; 45
+ 886:	07 fe       	sbrs	r0, 7
+ 888:	fd cf       	rjmp	.-6      	; 0x884 <getnextcluster+0x64>
+	return SPDR;
+ 88a:	6e b5       	in	r22, 0x2e	; 46
+		sd_byte(0xff);
+	}
+	
+	res  = sd_byte(0xff);
+	res |= sd_byte(0xff)<<8;
+	i += 2;
+ 88c:	ca 01       	movw	r24, r20
+ 88e:	02 96       	adiw	r24, 0x02	; 2
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 890:	3f ef       	ldi	r19, 0xFF	; 255
+ 892:	06 c0       	rjmp	.+12     	; 0x8a0 <getnextcluster+0x80>
+ 894:	3e bd       	out	0x2e, r19	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 896:	0d b4       	in	r0, 0x2d	; 45
+ 898:	07 fe       	sbrs	r0, 7
+ 89a:	fd cf       	rjmp	.-6      	; 0x896 <getnextcluster+0x76>
+	return SPDR;
+ 89c:	4e b5       	in	r20, 0x2e	; 46
+	
+	res  = sd_byte(0xff);
+	res |= sd_byte(0xff)<<8;
+	i += 2;
+	
+	for(i; i<512; i++)
+ 89e:	01 96       	adiw	r24, 0x01	; 1
+ 8a0:	42 e0       	ldi	r20, 0x02	; 2
+ 8a2:	80 30       	cpi	r24, 0x00	; 0
+ 8a4:	94 07       	cpc	r25, r20
+ 8a6:	b0 f3       	brcs	.-20     	; 0x894 <getnextcluster+0x74>
+		sd_byte(0xff);
+	
+	SS_PORT  |= (1<<SS);
+ 8a8:	40 9a       	sbi	0x08, 0	; 8
+	cluster %= 256;
+	for(i=0; i<cluster*2; i++){
+		sd_byte(0xff);
+	}
+	
+	res  = sd_byte(0xff);
+ 8aa:	30 e0       	ldi	r19, 0x00	; 0
+ 8ac:	96 2f       	mov	r25, r22
+ 8ae:	80 e0       	ldi	r24, 0x00	; 0
+ 8b0:	28 2b       	or	r18, r24
+ 8b2:	39 2b       	or	r19, r25
+	for(i; i<512; i++)
+		sd_byte(0xff);
+	
+	SS_PORT  |= (1<<SS);
+	return res;
+}
+ 8b4:	c9 01       	movw	r24, r18
+ 8b6:	1f 91       	pop	r17
+ 8b8:	0f 91       	pop	r16
+ 8ba:	08 95       	ret
+
+000008bc <getNextDir>:
+
+void getNextDir(DIR_ENTRY* dir)
+{
+ 8bc:	df 92       	push	r13
+ 8be:	ef 92       	push	r14
+ 8c0:	ff 92       	push	r15
+ 8c2:	0f 93       	push	r16
+ 8c4:	1f 93       	push	r17
+ 8c6:	cf 93       	push	r28
+ 8c8:	df 93       	push	r29
+ 8ca:	ec 01       	movw	r28, r24
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 8cc:	1f ef       	ldi	r17, 0xFF	; 255
+{
+	uint16_t i;
+	uint8_t j,k;
+	
+	again:
+	SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+dir->nowFile/16+1);
+ 8ce:	60 91 6d 01 	lds	r22, 0x016D
+ 8d2:	70 91 6e 01 	lds	r23, 0x016E
+ 8d6:	80 91 6f 01 	lds	r24, 0x016F
+ 8da:	90 91 70 01 	lds	r25, 0x0170
+ 8de:	6f 5f       	subi	r22, 0xFF	; 255
+ 8e0:	7f 4f       	sbci	r23, 0xFF	; 255
+ 8e2:	8f 4f       	sbci	r24, 0xFF	; 255
+ 8e4:	9f 4f       	sbci	r25, 0xFF	; 255
+ 8e6:	20 91 78 01 	lds	r18, 0x0178
+ 8ea:	30 91 79 01 	lds	r19, 0x0179
+ 8ee:	22 0f       	add	r18, r18
+ 8f0:	33 1f       	adc	r19, r19
+ 8f2:	40 e0       	ldi	r20, 0x00	; 0
+ 8f4:	50 e0       	ldi	r21, 0x00	; 0
+ 8f6:	62 0f       	add	r22, r18
+ 8f8:	73 1f       	adc	r23, r19
+ 8fa:	84 1f       	adc	r24, r20
+ 8fc:	95 1f       	adc	r25, r21
+ 8fe:	2c 89       	ldd	r18, Y+20	; 0x14
+ 900:	3d 89       	ldd	r19, Y+21	; 0x15
+ 902:	44 e0       	ldi	r20, 0x04	; 4
+ 904:	36 95       	lsr	r19
+ 906:	27 95       	ror	r18
+ 908:	4a 95       	dec	r20
+ 90a:	e1 f7       	brne	.-8      	; 0x904 <getNextDir+0x48>
+ 90c:	40 e0       	ldi	r20, 0x00	; 0
+ 90e:	50 e0       	ldi	r21, 0x00	; 0
+ 910:	62 0f       	add	r22, r18
+ 912:	73 1f       	adc	r23, r19
+ 914:	84 1f       	adc	r24, r20
+ 916:	95 1f       	adc	r25, r21
+ 918:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+	k = dir->nowFile%16;
+ 91c:	8c 89       	ldd	r24, Y+20	; 0x14
+ 91e:	9d 89       	ldd	r25, Y+21	; 0x15
+ 920:	2f e0       	ldi	r18, 0x0F	; 15
+ 922:	d2 2e       	mov	r13, r18
+ 924:	d8 22       	and	r13, r24
+ 926:	20 e0       	ldi	r18, 0x00	; 0
+ 928:	30 e0       	ldi	r19, 0x00	; 0
+	
+	for(i=0; i<k; i++){
+ 92a:	6d 2d       	mov	r22, r13
+ 92c:	70 e0       	ldi	r23, 0x00	; 0
+ 92e:	0b c0       	rjmp	.+22     	; 0x946 <getNextDir+0x8a>
+ 930:	40 e0       	ldi	r20, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 932:	1e bd       	out	0x2e, r17	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 934:	0d b4       	in	r0, 0x2d	; 45
+ 936:	07 fe       	sbrs	r0, 7
+ 938:	fd cf       	rjmp	.-6      	; 0x934 <getNextDir+0x78>
+	return SPDR;
+ 93a:	5e b5       	in	r21, 0x2e	; 46
+	again:
+	SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+dir->nowFile/16+1);
+	k = dir->nowFile%16;
+	
+	for(i=0; i<k; i++){
+		for(j=0; j<32; j++){
+ 93c:	4f 5f       	subi	r20, 0xFF	; 255
+ 93e:	40 32       	cpi	r20, 0x20	; 32
+ 940:	c1 f7       	brne	.-16     	; 0x932 <getNextDir+0x76>
+	
+	again:
+	SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+dir->nowFile/16+1);
+	k = dir->nowFile%16;
+	
+	for(i=0; i<k; i++){
+ 942:	2f 5f       	subi	r18, 0xFF	; 255
+ 944:	3f 4f       	sbci	r19, 0xFF	; 255
+ 946:	26 17       	cp	r18, r22
+ 948:	37 07       	cpc	r19, r23
+ 94a:	90 f3       	brcs	.-28     	; 0x930 <getNextDir+0x74>
+		for(j=0; j<32; j++){
+			sd_byte(0xff);
+		}
+	}
+	dir->nowFile++;
+ 94c:	01 96       	adiw	r24, 0x01	; 1
+ 94e:	9d 8b       	std	Y+21, r25	; 0x15
+ 950:	8c 8b       	std	Y+20, r24	; 0x14
+	if(dir->nowFile == 512){
+ 952:	80 50       	subi	r24, 0x00	; 0
+ 954:	92 40       	sbci	r25, 0x02	; 2
+ 956:	19 f0       	breq	.+6      	; 0x95e <getNextDir+0xa2>
+ 958:	80 e0       	ldi	r24, 0x00	; 0
+ 95a:	90 e0       	ldi	r25, 0x00	; 0
+ 95c:	03 c0       	rjmp	.+6      	; 0x964 <getNextDir+0xa8>
+		dir->nowFile = 0;
+ 95e:	1d 8a       	std	Y+21, r1	; 0x15
+ 960:	1c 8a       	std	Y+20, r1	; 0x14
+ 962:	b5 cf       	rjmp	.-150    	; 0x8ce <getNextDir+0x12>
+		goto again;
+	}
+	
+	for(i=0; i<9; i++){
+		dir->name[i] = 0;
+ 964:	fe 01       	movw	r30, r28
+ 966:	e8 0f       	add	r30, r24
+ 968:	f9 1f       	adc	r31, r25
+ 96a:	10 82       	st	Z, r1
+	if(dir->nowFile == 512){
+		dir->nowFile = 0;
+		goto again;
+	}
+	
+	for(i=0; i<9; i++){
+ 96c:	01 96       	adiw	r24, 0x01	; 1
+ 96e:	89 30       	cpi	r24, 0x09	; 9
+ 970:	91 05       	cpc	r25, r1
+ 972:	c1 f7       	brne	.-16     	; 0x964 <getNextDir+0xa8>
+ 974:	20 e0       	ldi	r18, 0x00	; 0
+ 976:	30 e0       	ldi	r19, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 978:	9f ef       	ldi	r25, 0xFF	; 255
+ 97a:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 97c:	0d b4       	in	r0, 0x2d	; 45
+ 97e:	07 fe       	sbrs	r0, 7
+ 980:	fd cf       	rjmp	.-6      	; 0x97c <getNextDir+0xc0>
+	return SPDR;
+ 982:	8e b5       	in	r24, 0x2e	; 46
+	
+	for(i=0; i<9; i++){
+		dir->name[i] = 0;
+	}
+	for(i=0; i<8; i++){
+		dir->name[i] = sd_byte(0xff);
+ 984:	fe 01       	movw	r30, r28
+ 986:	e2 0f       	add	r30, r18
+ 988:	f3 1f       	adc	r31, r19
+ 98a:	80 83       	st	Z, r24
+	}
+	
+	for(i=0; i<9; i++){
+		dir->name[i] = 0;
+	}
+	for(i=0; i<8; i++){
+ 98c:	2f 5f       	subi	r18, 0xFF	; 255
+ 98e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 990:	28 30       	cpi	r18, 0x08	; 8
+ 992:	31 05       	cpc	r19, r1
+ 994:	91 f7       	brne	.-28     	; 0x97a <getNextDir+0xbe>
+		dir->name[i] = sd_byte(0xff);
+	}
+	//dir->name[8] = 0;
+	
+	for(i=0; i<4; i++){
+		dir->extension[i] = 0;
+ 996:	19 86       	std	Y+9, r1	; 0x09
+ 998:	1a 86       	std	Y+10, r1	; 0x0a
+ 99a:	1b 86       	std	Y+11, r1	; 0x0b
+ 99c:	1c 86       	std	Y+12, r1	; 0x0c
+ 99e:	fe 01       	movw	r30, r28
+ 9a0:	20 e0       	ldi	r18, 0x00	; 0
+ 9a2:	30 e0       	ldi	r19, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 9a4:	9f ef       	ldi	r25, 0xFF	; 255
+ 9a6:	9e bd       	out	0x2e, r25	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 9a8:	0d b4       	in	r0, 0x2d	; 45
+ 9aa:	07 fe       	sbrs	r0, 7
+ 9ac:	fd cf       	rjmp	.-6      	; 0x9a8 <getNextDir+0xec>
+	return SPDR;
+ 9ae:	8e b5       	in	r24, 0x2e	; 46
+	
+	for(i=0; i<4; i++){
+		dir->extension[i] = 0;
+	}
+	for(i=0; i<3; i++){
+		dir->extension[i] = sd_byte(0xff);
+ 9b0:	81 87       	std	Z+9, r24	; 0x09
+	//dir->name[8] = 0;
+	
+	for(i=0; i<4; i++){
+		dir->extension[i] = 0;
+	}
+	for(i=0; i<3; i++){
+ 9b2:	2f 5f       	subi	r18, 0xFF	; 255
+ 9b4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 9b6:	31 96       	adiw	r30, 0x01	; 1
+ 9b8:	23 30       	cpi	r18, 0x03	; 3
+ 9ba:	31 05       	cpc	r19, r1
+ 9bc:	a1 f7       	brne	.-24     	; 0x9a6 <getNextDir+0xea>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 9be:	8f ef       	ldi	r24, 0xFF	; 255
+ 9c0:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 9c2:	0d b4       	in	r0, 0x2d	; 45
+ 9c4:	07 fe       	sbrs	r0, 7
+ 9c6:	fd cf       	rjmp	.-6      	; 0x9c2 <getNextDir+0x106>
+	return SPDR;
+ 9c8:	8e b5       	in	r24, 0x2e	; 46
+	for(i=0; i<3; i++){
+		dir->extension[i] = sd_byte(0xff);
+	}
+	//dir->extension[3] = 0;
+	
+	dir->attribute = sd_byte(0xff);
+ 9ca:	8d 87       	std	Y+13, r24	; 0x0d
+ 9cc:	80 e0       	ldi	r24, 0x00	; 0
+ 9ce:	90 e0       	ldi	r25, 0x00	; 0
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 9d0:	2f ef       	ldi	r18, 0xFF	; 255
+ 9d2:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 9d4:	0d b4       	in	r0, 0x2d	; 45
+ 9d6:	07 fe       	sbrs	r0, 7
+ 9d8:	fd cf       	rjmp	.-6      	; 0x9d4 <getNextDir+0x118>
+	return SPDR;
+ 9da:	3e b5       	in	r19, 0x2e	; 46
+	}
+	//dir->extension[3] = 0;
+	
+	dir->attribute = sd_byte(0xff);
+	
+	for(i=0; i<14; i++){
+ 9dc:	01 96       	adiw	r24, 0x01	; 1
+ 9de:	8e 30       	cpi	r24, 0x0E	; 14
+ 9e0:	91 05       	cpc	r25, r1
+ 9e2:	b9 f7       	brne	.-18     	; 0x9d2 <getNextDir+0x116>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 9e4:	8f ef       	ldi	r24, 0xFF	; 255
+ 9e6:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 9e8:	0d b4       	in	r0, 0x2d	; 45
+ 9ea:	07 fe       	sbrs	r0, 7
+ 9ec:	fd cf       	rjmp	.-6      	; 0x9e8 <getNextDir+0x12c>
+	return SPDR;
+ 9ee:	3e b5       	in	r19, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ 9f0:	8f ef       	ldi	r24, 0xFF	; 255
+ 9f2:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ 9f4:	0d b4       	in	r0, 0x2d	; 45
+ 9f6:	07 fe       	sbrs	r0, 7
+ 9f8:	fd cf       	rjmp	.-6      	; 0x9f4 <getNextDir+0x138>
+	return SPDR;
+ 9fa:	2e b5       	in	r18, 0x2e	; 46
+	
+	char ch;
+	ch = sd_byte(0xff);
+	dir->cluster  =  ch;
+	ch = sd_byte(0xff);
+	dir->cluster |= ch<<8;
+ 9fc:	92 2f       	mov	r25, r18
+ 9fe:	80 e0       	ldi	r24, 0x00	; 0
+ a00:	23 2f       	mov	r18, r19
+ a02:	30 e0       	ldi	r19, 0x00	; 0
+ a04:	82 2b       	or	r24, r18
+ a06:	93 2b       	or	r25, r19
+ a08:	9f 87       	std	Y+15, r25	; 0x0f
+ a0a:	8e 87       	std	Y+14, r24	; 0x0e
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ a0c:	8f ef       	ldi	r24, 0xFF	; 255
+ a0e:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ a10:	0d b4       	in	r0, 0x2d	; 45
+ a12:	07 fe       	sbrs	r0, 7
+ a14:	fd cf       	rjmp	.-6      	; 0xa10 <getNextDir+0x154>
+	return SPDR;
+ a16:	6e b5       	in	r22, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ a18:	8f ef       	ldi	r24, 0xFF	; 255
+ a1a:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ a1c:	0d b4       	in	r0, 0x2d	; 45
+ a1e:	07 fe       	sbrs	r0, 7
+ a20:	fd cf       	rjmp	.-6      	; 0xa1c <getNextDir+0x160>
+	return SPDR;
+ a22:	2e b5       	in	r18, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ a24:	8f ef       	ldi	r24, 0xFF	; 255
+ a26:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ a28:	0d b4       	in	r0, 0x2d	; 45
+ a2a:	07 fe       	sbrs	r0, 7
+ a2c:	fd cf       	rjmp	.-6      	; 0xa28 <getNextDir+0x16c>
+	return SPDR;
+ a2e:	9e b5       	in	r25, 0x2e	; 46
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ a30:	8f ef       	ldi	r24, 0xFF	; 255
+ a32:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ a34:	0d b4       	in	r0, 0x2d	; 45
+ a36:	07 fe       	sbrs	r0, 7
+ a38:	fd cf       	rjmp	.-6      	; 0xa34 <getNextDir+0x178>
+	return SPDR;
+ a3a:	ee b4       	in	r14, 0x2e	; 46
+	dir->cluster |= ch<<8;
+	
+	dir->fileSize  = (uint32_t)sd_byte(0xff);
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<8;
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<16;
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<24;
+ a3c:	30 e0       	ldi	r19, 0x00	; 0
+ a3e:	40 e0       	ldi	r20, 0x00	; 0
+ a40:	50 e0       	ldi	r21, 0x00	; 0
+ a42:	54 2f       	mov	r21, r20
+ a44:	43 2f       	mov	r20, r19
+ a46:	32 2f       	mov	r19, r18
+ a48:	22 27       	eor	r18, r18
+ a4a:	89 2f       	mov	r24, r25
+ a4c:	90 e0       	ldi	r25, 0x00	; 0
+ a4e:	a0 e0       	ldi	r26, 0x00	; 0
+ a50:	b0 e0       	ldi	r27, 0x00	; 0
+ a52:	dc 01       	movw	r26, r24
+ a54:	99 27       	eor	r25, r25
+ a56:	88 27       	eor	r24, r24
+ a58:	28 2b       	or	r18, r24
+ a5a:	39 2b       	or	r19, r25
+ a5c:	4a 2b       	or	r20, r26
+ a5e:	5b 2b       	or	r21, r27
+ a60:	86 2f       	mov	r24, r22
+ a62:	90 e0       	ldi	r25, 0x00	; 0
+ a64:	a0 e0       	ldi	r26, 0x00	; 0
+ a66:	b0 e0       	ldi	r27, 0x00	; 0
+ a68:	28 2b       	or	r18, r24
+ a6a:	39 2b       	or	r19, r25
+ a6c:	4a 2b       	or	r20, r26
+ a6e:	5b 2b       	or	r21, r27
+ a70:	ff 24       	eor	r15, r15
+ a72:	00 e0       	ldi	r16, 0x00	; 0
+ a74:	10 e0       	ldi	r17, 0x00	; 0
+ a76:	1e 2d       	mov	r17, r14
+ a78:	00 27       	eor	r16, r16
+ a7a:	ff 24       	eor	r15, r15
+ a7c:	ee 24       	eor	r14, r14
+ a7e:	2e 29       	or	r18, r14
+ a80:	3f 29       	or	r19, r15
+ a82:	40 2b       	or	r20, r16
+ a84:	51 2b       	or	r21, r17
+ a86:	28 8b       	std	Y+16, r18	; 0x10
+ a88:	39 8b       	std	Y+17, r19	; 0x11
+ a8a:	4a 8b       	std	Y+18, r20	; 0x12
+ a8c:	5b 8b       	std	Y+19, r21	; 0x13
+	
+	for(i=(16-k)*32; 0<i; i--){
+ a8e:	80 e1       	ldi	r24, 0x10	; 16
+ a90:	90 e0       	ldi	r25, 0x00	; 0
+ a92:	8d 19       	sub	r24, r13
+ a94:	91 09       	sbc	r25, r1
+ a96:	a5 e0       	ldi	r26, 0x05	; 5
+ a98:	88 0f       	add	r24, r24
+ a9a:	99 1f       	adc	r25, r25
+ a9c:	aa 95       	dec	r26
+ a9e:	e1 f7       	brne	.-8      	; 0xa98 <getNextDir+0x1dc>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ aa0:	2f ef       	ldi	r18, 0xFF	; 255
+ aa2:	2e bd       	out	0x2e, r18	; 46
+	while(!(SPSR & (1<<SPIF)));
+ aa4:	0d b4       	in	r0, 0x2d	; 45
+ aa6:	07 fe       	sbrs	r0, 7
+ aa8:	fd cf       	rjmp	.-6      	; 0xaa4 <getNextDir+0x1e8>
+	return SPDR;
+ aaa:	3e b5       	in	r19, 0x2e	; 46
+	dir->fileSize  = (uint32_t)sd_byte(0xff);
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<8;
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<16;
+	dir->fileSize |= (uint32_t)sd_byte(0xff)<<24;
+	
+	for(i=(16-k)*32; 0<i; i--){
+ aac:	01 97       	sbiw	r24, 0x01	; 1
+ aae:	c9 f7       	brne	.-14     	; 0xaa2 <getNextDir+0x1e6>
+		sd_byte(0xff);
+	}
+	
+	SS_PORT  |= (1<<SS);
+ ab0:	40 9a       	sbi	0x08, 0	; 8
+}
+ ab2:	df 91       	pop	r29
+ ab4:	cf 91       	pop	r28
+ ab6:	1f 91       	pop	r17
+ ab8:	0f 91       	pop	r16
+ aba:	ff 90       	pop	r15
+ abc:	ef 90       	pop	r14
+ abe:	df 90       	pop	r13
+ ac0:	08 95       	ret
+
+00000ac2 <SD_openNowDir>:
+
+void SD_openNowDir(void)
+{
+ ac2:	60 91 6d 01 	lds	r22, 0x016D
+ ac6:	70 91 6e 01 	lds	r23, 0x016E
+ aca:	80 91 6f 01 	lds	r24, 0x016F
+ ace:	90 91 70 01 	lds	r25, 0x0170
+ ad2:	6f 5d       	subi	r22, 0xDF	; 223
+ ad4:	7f 4f       	sbci	r23, 0xFF	; 255
+ ad6:	8f 4f       	sbci	r24, 0xFF	; 255
+ ad8:	9f 4f       	sbci	r25, 0xFF	; 255
+ ada:	20 91 78 01 	lds	r18, 0x0178
+ ade:	30 91 79 01 	lds	r19, 0x0179
+ ae2:	22 0f       	add	r18, r18
+ ae4:	33 1f       	adc	r19, r19
+ ae6:	40 e0       	ldi	r20, 0x00	; 0
+ ae8:	50 e0       	ldi	r21, 0x00	; 0
+ aea:	62 0f       	add	r22, r18
+ aec:	73 1f       	adc	r23, r19
+ aee:	84 1f       	adc	r24, r20
+ af0:	95 1f       	adc	r25, r21
+ af2:	40 91 77 01 	lds	r20, 0x0177
+ af6:	50 e0       	ldi	r21, 0x00	; 0
+ af8:	20 91 60 01 	lds	r18, 0x0160
+ afc:	30 91 61 01 	lds	r19, 0x0161
+ b00:	22 50       	subi	r18, 0x02	; 2
+ b02:	30 40       	sbci	r19, 0x00	; 0
+ b04:	f9 01       	movw	r30, r18
+ b06:	4e 9f       	mul	r20, r30
+ b08:	90 01       	movw	r18, r0
+ b0a:	4f 9f       	mul	r20, r31
+ b0c:	30 0d       	add	r19, r0
+ b0e:	5e 9f       	mul	r21, r30
+ b10:	30 0d       	add	r19, r0
+ b12:	11 24       	eor	r1, r1
+ b14:	40 e0       	ldi	r20, 0x00	; 0
+ b16:	50 e0       	ldi	r21, 0x00	; 0
+ b18:	62 0f       	add	r22, r18
+ b1a:	73 1f       	adc	r23, r19
+ b1c:	84 1f       	adc	r24, r20
+ b1e:	95 1f       	adc	r25, r21
+ b20:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+	SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+33+(nowDir.cluster-2)*bpb.sectorsPerCluster);
+	nowDir.nowByte = 0;
+ b24:	10 92 69 01 	sts	0x0169, r1
+ b28:	10 92 68 01 	sts	0x0168, r1
+	nowDir.nowSector = 0;
+ b2c:	10 92 6b 01 	sts	0x016B, r1
+ b30:	10 92 6a 01 	sts	0x016A, r1
+}
+ b34:	08 95       	ret
+
+00000b36 <SD_readNowDir>:
+
+
+uint8_t SD_readNowDir(uint8_t *res)
+{
+ b36:	cf 93       	push	r28
+ b38:	df 93       	push	r29
+ b3a:	ec 01       	movw	r28, r24
+	nowDir.nowByte++;
+ b3c:	80 91 68 01 	lds	r24, 0x0168
+ b40:	90 91 69 01 	lds	r25, 0x0169
+ b44:	01 96       	adiw	r24, 0x01	; 1
+ b46:	90 93 69 01 	sts	0x0169, r25
+ b4a:	80 93 68 01 	sts	0x0168, r24
+	*res = 1; //1 = true
+ b4e:	81 e0       	ldi	r24, 0x01	; 1
+ b50:	88 83       	st	Y, r24
+	if(nowDir.nowByte == 512){
+ b52:	80 91 68 01 	lds	r24, 0x0168
+ b56:	90 91 69 01 	lds	r25, 0x0169
+ b5a:	80 50       	subi	r24, 0x00	; 0
+ b5c:	92 40       	sbci	r25, 0x02	; 2
+ b5e:	09 f0       	breq	.+2      	; 0xb62 <SD_readNowDir+0x2c>
+ b60:	64 c0       	rjmp	.+200    	; 0xc2a <SD_readNowDir+0xf4>
+		nowDir.nowByte = 0;
+ b62:	10 92 69 01 	sts	0x0169, r1
+ b66:	10 92 68 01 	sts	0x0168, r1
+		nowDir.nowSector++;
+ b6a:	20 91 6a 01 	lds	r18, 0x016A
+ b6e:	30 91 6b 01 	lds	r19, 0x016B
+ b72:	2f 5f       	subi	r18, 0xFF	; 255
+ b74:	3f 4f       	sbci	r19, 0xFF	; 255
+ b76:	30 93 6b 01 	sts	0x016B, r19
+ b7a:	20 93 6a 01 	sts	0x016A, r18
+		if(nowDir.nowSector == bpb.sectorsPerCluster){
+ b7e:	80 91 77 01 	lds	r24, 0x0177
+ b82:	90 e0       	ldi	r25, 0x00	; 0
+ b84:	28 17       	cp	r18, r24
+ b86:	39 07       	cpc	r19, r25
+ b88:	a1 f4       	brne	.+40     	; 0xbb2 <SD_readNowDir+0x7c>
+			SS_PORT  |= (1<<SS);
+ b8a:	40 9a       	sbi	0x08, 0	; 8
+			nowDir.cluster = getnextcluster(nowDir.cluster);
+ b8c:	80 91 60 01 	lds	r24, 0x0160
+ b90:	90 91 61 01 	lds	r25, 0x0161
+ b94:	0e 94 10 04 	call	0x820	; 0x820 <getnextcluster>
+ b98:	90 93 61 01 	sts	0x0161, r25
+ b9c:	80 93 60 01 	sts	0x0160, r24
+			if(0xfff8 <= nowDir.cluster){
+ ba0:	88 5f       	subi	r24, 0xF8	; 248
+ ba2:	9f 4f       	sbci	r25, 0xFF	; 255
+ ba4:	10 f0       	brcs	.+4      	; 0xbaa <SD_readNowDir+0x74>
+				*res = 0; //0=false
+ ba6:	18 82       	st	Y, r1
+ ba8:	46 c0       	rjmp	.+140    	; 0xc36 <SD_readNowDir+0x100>
+				goto BREAK;
+			}
+			nowDir.nowSector = 0;
+ baa:	10 92 6b 01 	sts	0x016B, r1
+ bae:	10 92 6a 01 	sts	0x016A, r1
+		}
+		SS_PORT  |= (1<<SS);
+ bb2:	40 9a       	sbi	0x08, 0	; 8
+		SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+33+(nowDir.cluster-2)*bpb.sectorsPerCluster+nowDir.nowSector);
+ bb4:	60 91 6d 01 	lds	r22, 0x016D
+ bb8:	70 91 6e 01 	lds	r23, 0x016E
+ bbc:	80 91 6f 01 	lds	r24, 0x016F
+ bc0:	90 91 70 01 	lds	r25, 0x0170
+ bc4:	6f 5d       	subi	r22, 0xDF	; 223
+ bc6:	7f 4f       	sbci	r23, 0xFF	; 255
+ bc8:	8f 4f       	sbci	r24, 0xFF	; 255
+ bca:	9f 4f       	sbci	r25, 0xFF	; 255
+ bcc:	20 91 6a 01 	lds	r18, 0x016A
+ bd0:	30 91 6b 01 	lds	r19, 0x016B
+ bd4:	40 e0       	ldi	r20, 0x00	; 0
+ bd6:	50 e0       	ldi	r21, 0x00	; 0
+ bd8:	62 0f       	add	r22, r18
+ bda:	73 1f       	adc	r23, r19
+ bdc:	84 1f       	adc	r24, r20
+ bde:	95 1f       	adc	r25, r21
+ be0:	20 91 78 01 	lds	r18, 0x0178
+ be4:	30 91 79 01 	lds	r19, 0x0179
+ be8:	22 0f       	add	r18, r18
+ bea:	33 1f       	adc	r19, r19
+ bec:	40 e0       	ldi	r20, 0x00	; 0
+ bee:	50 e0       	ldi	r21, 0x00	; 0
+ bf0:	62 0f       	add	r22, r18
+ bf2:	73 1f       	adc	r23, r19
+ bf4:	84 1f       	adc	r24, r20
+ bf6:	95 1f       	adc	r25, r21
+ bf8:	40 91 77 01 	lds	r20, 0x0177
+ bfc:	50 e0       	ldi	r21, 0x00	; 0
+ bfe:	20 91 60 01 	lds	r18, 0x0160
+ c02:	30 91 61 01 	lds	r19, 0x0161
+ c06:	22 50       	subi	r18, 0x02	; 2
+ c08:	30 40       	sbci	r19, 0x00	; 0
+ c0a:	f9 01       	movw	r30, r18
+ c0c:	4e 9f       	mul	r20, r30
+ c0e:	90 01       	movw	r18, r0
+ c10:	4f 9f       	mul	r20, r31
+ c12:	30 0d       	add	r19, r0
+ c14:	5e 9f       	mul	r21, r30
+ c16:	30 0d       	add	r19, r0
+ c18:	11 24       	eor	r1, r1
+ c1a:	40 e0       	ldi	r20, 0x00	; 0
+ c1c:	50 e0       	ldi	r21, 0x00	; 0
+ c1e:	62 0f       	add	r22, r18
+ c20:	73 1f       	adc	r23, r19
+ c22:	84 1f       	adc	r24, r20
+ c24:	95 1f       	adc	r25, r21
+ c26:	0e 94 bf 02 	call	0x57e	; 0x57e <SD_openSector>
+    while(!(TIFR2 & (1<<TOV2)));
+}
+
+inline uint8_t sd_byte(uint8_t data)
+{	
+	SPDR = data;
+ c2a:	8f ef       	ldi	r24, 0xFF	; 255
+ c2c:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));
+ c2e:	0d b4       	in	r0, 0x2d	; 45
+ c30:	07 fe       	sbrs	r0, 7
+ c32:	fd cf       	rjmp	.-6      	; 0xc2e <SD_readNowDir+0xf8>
+	return SPDR;
+ c34:	8e b5       	in	r24, 0x2e	; 46
+		SD_openSector(mbr.firstSectorNumbers+bpb.sectorsPerFAT*2+33+(nowDir.cluster-2)*bpb.sectorsPerCluster+nowDir.nowSector);
+	}
+	
+	return sd_byte(0xff);
+	BREAK: return ;
+}
+ c36:	df 91       	pop	r29
+ c38:	cf 91       	pop	r28
+ c3a:	08 95       	ret
+
+00000c3c <_exit>:
+ c3c:	f8 94       	cli
+
+00000c3e <__stop_program>:
+ c3e:	ff cf       	rjmp	.-2      	; 0xc3e <__stop_program>

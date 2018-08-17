@@ -1,0 +1,443 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	timer_init
+  20               	timer_init:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LM2:
+  26 0000 84B1      		in r24,36-32
+  27 0002 8660      		ori r24,lo8(6)
+  28 0004 84B9      		out 36-32,r24
+  29               	.LM3:
+  30 0006 E0E8      		ldi r30,lo8(128)
+  31 0008 F0E0      		ldi r31,hi8(128)
+  32 000a 81EB      		ldi r24,lo8(-79)
+  33 000c 8083      		st Z,r24
+  34               	.LM4:
+  35 000e 89E0      		ldi r24,lo8(9)
+  36 0010 8093 8100 		sts 129,r24
+  37               	.LM5:
+  38 0014 F093 8900 		sts (136)+1,r31
+  39 0018 E093 8800 		sts 136,r30
+  40               	.LM6:
+  41 001c F093 8B00 		sts (138)+1,r31
+  42 0020 E093 8A00 		sts 138,r30
+  43               	.LM7:
+  44 0024 92E0      		ldi r25,lo8(2)
+  45 0026 94BD      		out 68-32,r25
+  46               	.LM8:
+  47 0028 95BD      		out 69-32,r25
+  48               	.LM9:
+  49 002a 8EE4      		ldi r24,lo8(78)
+  50 002c 87BD      		out 71-32,r24
+  51               	.LM10:
+  52 002e 9093 6E00 		sts 110,r25
+  53               	/* epilogue start */
+  54               	.LM11:
+  55 0032 0895      		ret
+  56               	.LFE4:
+  58               	.global	button_init
+  60               	button_init:
+  61               	.LFB5:
+  62               	.LM12:
+  63               	/* prologue: function */
+  64               	/* frame size = 0 */
+  65               	.LM13:
+  66 0034 5298      		cbi 42-32,2
+  67               	.LM14:
+  68 0036 5A9A      		sbi 43-32,2
+  69               	.LM15:
+  70 0038 1092 6900 		sts 105,__zero_reg__
+  71               	.LM16:
+  72 003c 81E0      		ldi r24,lo8(1)
+  73 003e 8DBB      		out 61-32,r24
+  74               	/* epilogue start */
+  75               	.LM17:
+  76 0040 0895      		ret
+  77               	.LFE5:
+  79               	.global	main
+  81               	main:
+  82               	.LFB6:
+  83               	.LM18:
+  84               	/* prologue: function */
+  85               	/* frame size = 0 */
+  86               	.LM19:
+  87 0042 0E94 0000 		call sd_init
+  88               	.LM20:
+  89 0046 0E94 0000 		call SD_readMRB
+  90               	.LM21:
+  91 004a 0E94 0000 		call SD_readBPB
+  92               	.LM22:
+  93 004e 1092 0000 		sts (nowDir+20)+1,__zero_reg__
+  94 0052 1092 0000 		sts nowDir+20,__zero_reg__
+  95 0056 00C0      		rjmp .L6
+  96               	.L7:
+  97               	.LM23:
+  98 0058 80E0      		ldi r24,lo8(nowDir)
+  99 005a 90E0      		ldi r25,hi8(nowDir)
+ 100 005c 0E94 0000 		call getNextDir
+ 101               	.L6:
+ 102               	.LM24:
+ 103 0060 8091 0000 		lds r24,nowDir
+ 104 0064 853E      		cpi r24,lo8(-27)
+ 105 0066 01F0      		breq .L7
+ 106 0068 8530      		cpi r24,lo8(5)
+ 107 006a 01F0      		breq .L7
+ 108 006c 8091 0000 		lds r24,nowDir+9
+ 109 0070 8735      		cpi r24,lo8(87)
+ 110 0072 01F4      		brne .L7
+ 111 0074 8091 0000 		lds r24,nowDir+10
+ 112 0078 8134      		cpi r24,lo8(65)
+ 113 007a 01F4      		brne .L7
+ 114 007c 8091 0000 		lds r24,nowDir+11
+ 115 0080 8635      		cpi r24,lo8(86)
+ 116 0082 01F4      		brne .L7
+ 117               	.LM25:
+ 118 0084 0E94 0000 		call SD_openNowDir
+ 119               	.LBB6:
+ 120               	.LBB7:
+ 121               	.LM26:
+ 122 0088 84B1      		in r24,36-32
+ 123 008a 8660      		ori r24,lo8(6)
+ 124 008c 84B9      		out 36-32,r24
+ 125               	.LM27:
+ 126 008e 20E8      		ldi r18,lo8(128)
+ 127 0090 30E0      		ldi r19,hi8(128)
+ 128 0092 81EB      		ldi r24,lo8(-79)
+ 129 0094 8093 8000 		sts 128,r24
+ 130               	.LM28:
+ 131 0098 89E0      		ldi r24,lo8(9)
+ 132 009a 8093 8100 		sts 129,r24
+ 133               	.LM29:
+ 134 009e 3093 8900 		sts (136)+1,r19
+ 135 00a2 2093 8800 		sts 136,r18
+ 136               	.LM30:
+ 137 00a6 3093 8B00 		sts (138)+1,r19
+ 138 00aa 2093 8A00 		sts 138,r18
+ 139               	.LM31:
+ 140 00ae 92E0      		ldi r25,lo8(2)
+ 141 00b0 94BD      		out 68-32,r25
+ 142               	.LM32:
+ 143 00b2 95BD      		out 69-32,r25
+ 144               	.LM33:
+ 145 00b4 8EE4      		ldi r24,lo8(78)
+ 146 00b6 87BD      		out 71-32,r24
+ 147               	.LM34:
+ 148 00b8 9093 6E00 		sts 110,r25
+ 149               	.LBE7:
+ 150               	.LBE6:
+ 151               	.LBB8:
+ 152               	.LBB9:
+ 153               	.LM35:
+ 154 00bc 5298      		cbi 42-32,2
+ 155               	.LM36:
+ 156 00be 5A9A      		sbi 43-32,2
+ 157               	.LM37:
+ 158 00c0 1092 6900 		sts 105,__zero_reg__
+ 159               	.LM38:
+ 160 00c4 81E0      		ldi r24,lo8(1)
+ 161 00c6 8DBB      		out 61-32,r24
+ 162               	.LBE9:
+ 163               	.LBE8:
+ 164               	.LM39:
+ 165 00c8 0E94 0000 		call UART_init
+ 166               	.LM40:
+ 167               	/* #APP */
+ 168               	 ;  117 "main.c" 1
+ 169 00cc 7894      		sei
+ 170               	 ;  0 "" 2
+ 171               	/* #NOAPP */
+ 172               	.L8:
+ 173 00ce 00C0      		rjmp .L8
+ 174               	.LFE6:
+ 176               	.global	__vector_14
+ 178               	__vector_14:
+ 179               	.LFB3:
+ 180               	.LM41:
+ 181 00d0 1F92      		push __zero_reg__
+ 182 00d2 0F92      		push r0
+ 183 00d4 0FB6      		in r0,__SREG__
+ 184 00d6 0F92      		push r0
+ 185 00d8 1124      		clr __zero_reg__
+ 186 00da 2F93      		push r18
+ 187 00dc 3F93      		push r19
+ 188 00de 4F93      		push r20
+ 189 00e0 5F93      		push r21
+ 190 00e2 6F93      		push r22
+ 191 00e4 7F93      		push r23
+ 192 00e6 8F93      		push r24
+ 193 00e8 9F93      		push r25
+ 194 00ea AF93      		push r26
+ 195 00ec BF93      		push r27
+ 196 00ee EF93      		push r30
+ 197 00f0 FF93      		push r31
+ 198 00f2 DF93      		push r29
+ 199 00f4 CF93      		push r28
+ 200 00f6 0F92      		push __tmp_reg__
+ 201 00f8 CDB7      		in r28,__SP_L__
+ 202 00fa DEB7      		in r29,__SP_H__
+ 203               	/* prologue: Signal */
+ 204               	/* frame size = 1 */
+ 205               	.LM42:
+ 206 00fc 8091 0000 		lds r24,wave
+ 207 0100 90E0      		ldi r25,lo8(0)
+ 208 0102 9093 8900 		sts (136)+1,r25
+ 209 0106 8093 8800 		sts 136,r24
+ 210               	.LM43:
+ 211 010a 9093 8B00 		sts (138)+1,r25
+ 212 010e 8093 8A00 		sts 138,r24
+ 213               	.LM44:
+ 214 0112 CE01      		movw r24,r28
+ 215 0114 0196      		adiw r24,1
+ 216 0116 0E94 0000 		call SD_readNowDir
+ 217 011a 8093 0000 		sts wave,r24
+ 218               	.LM45:
+ 219 011e 8981      		ldd r24,Y+1
+ 220               	.LVL0:
+ 221 0120 8823      		tst r24
+ 222 0122 01F4      		brne .L13
+ 223               	.L16:
+ 224               	.LM46:
+ 225 0124 80E0      		ldi r24,lo8(nowDir)
+ 226 0126 90E0      		ldi r25,hi8(nowDir)
+ 227 0128 0E94 0000 		call getNextDir
+ 228               	.LM47:
+ 229 012c 8091 0000 		lds r24,nowDir
+ 230 0130 853E      		cpi r24,lo8(-27)
+ 231 0132 01F0      		breq .L16
+ 232 0134 8530      		cpi r24,lo8(5)
+ 233 0136 01F0      		breq .L16
+ 234 0138 8091 0000 		lds r24,nowDir+9
+ 235 013c 8735      		cpi r24,lo8(87)
+ 236 013e 01F4      		brne .L16
+ 237 0140 8091 0000 		lds r24,nowDir+10
+ 238 0144 8134      		cpi r24,lo8(65)
+ 239 0146 01F4      		brne .L16
+ 240 0148 8091 0000 		lds r24,nowDir+11
+ 241 014c 8635      		cpi r24,lo8(86)
+ 242 014e 01F4      		brne .L16
+ 243               	.LM48:
+ 244 0150 0E94 0000 		call SD_openNowDir
+ 245               	.LVL1:
+ 246               	.L13:
+ 247               	/* epilogue start */
+ 248               	.LM49:
+ 249 0154 0F90      		pop __tmp_reg__
+ 250 0156 CF91      		pop r28
+ 251 0158 DF91      		pop r29
+ 252 015a FF91      		pop r31
+ 253 015c EF91      		pop r30
+ 254 015e BF91      		pop r27
+ 255 0160 AF91      		pop r26
+ 256 0162 9F91      		pop r25
+ 257 0164 8F91      		pop r24
+ 258 0166 7F91      		pop r23
+ 259 0168 6F91      		pop r22
+ 260 016a 5F91      		pop r21
+ 261 016c 4F91      		pop r20
+ 262 016e 3F91      		pop r19
+ 263 0170 2F91      		pop r18
+ 264 0172 0F90      		pop r0
+ 265 0174 0FBE      		out __SREG__,r0
+ 266 0176 0F90      		pop r0
+ 267 0178 1F90      		pop __zero_reg__
+ 268 017a 1895      		reti
+ 269               	.LFE3:
+ 271               		.data
+ 272               	.LC0:
+ 273 0000 0A0D 494E 		.string	"\n\rINT0_vect\n\r"
+ 273      5430 5F76 
+ 273      6563 740A 
+ 273      0D00 
+ 274               	.LC1:
+ 275 000e 0A0D 494E 		.string	"\n\rINT0_vect 1\n\r"
+ 275      5430 5F76 
+ 275      6563 7420 
+ 275      310A 0D00 
+ 276               	.LC2:
+ 277 001e 0A0D 494E 		.string	"\n\rINT0_vect 2\n\r"
+ 277      5430 5F76 
+ 277      6563 7420 
+ 277      320A 0D00 
+ 278               	.LC3:
+ 279 002e 0A0D 494E 		.string	"\n\rINT0_vect 3\n\r"
+ 279      5430 5F76 
+ 279      6563 7420 
+ 279      330A 0D00 
+ 280               	.LC4:
+ 281 003e 0A0D 494E 		.string	"\n\rINT0_vect end\n\r"
+ 281      5430 5F76 
+ 281      6563 7420 
+ 281      656E 640A 
+ 281      0D00 
+ 282               		.text
+ 283               	.global	__vector_1
+ 285               	__vector_1:
+ 286               	.LFB2:
+ 287               	.LM50:
+ 288 017c 1F92      		push __zero_reg__
+ 289 017e 0F92      		push r0
+ 290 0180 0FB6      		in r0,__SREG__
+ 291 0182 0F92      		push r0
+ 292 0184 1124      		clr __zero_reg__
+ 293 0186 2F93      		push r18
+ 294 0188 3F93      		push r19
+ 295 018a 4F93      		push r20
+ 296 018c 5F93      		push r21
+ 297 018e 6F93      		push r22
+ 298 0190 7F93      		push r23
+ 299 0192 8F93      		push r24
+ 300 0194 9F93      		push r25
+ 301 0196 AF93      		push r26
+ 302 0198 BF93      		push r27
+ 303 019a CF93      		push r28
+ 304 019c DF93      		push r29
+ 305 019e EF93      		push r30
+ 306 01a0 FF93      		push r31
+ 307               	/* prologue: Signal */
+ 308               	/* frame size = 0 */
+ 309               	.LM51:
+ 310 01a2 80E0      		ldi r24,lo8(.LC0)
+ 311 01a4 90E0      		ldi r25,hi8(.LC0)
+ 312 01a6 0E94 0000 		call UART_str
+ 313 01aa C0E0      		ldi r28,lo8(0)
+ 314 01ac D0E0      		ldi r29,hi8(0)
+ 315               	.LVL2:
+ 316               	.L18:
+ 317               	.LM52:
+ 318 01ae 84E1      		ldi r24,lo8(20)
+ 319 01b0 90E0      		ldi r25,hi8(20)
+ 320 01b2 0E94 0000 		call wait_ms
+ 321               	.LM53:
+ 322 01b6 2196      		adiw r28,1
+ 323 01b8 C832      		cpi r28,40
+ 324 01ba D105      		cpc r29,__zero_reg__
+ 325 01bc 01F4      		brne .L18
+ 326               	.LM54:
+ 327 01be 80E0      		ldi r24,lo8(.LC1)
+ 328 01c0 90E0      		ldi r25,hi8(.LC1)
+ 329 01c2 0E94 0000 		call UART_str
+ 330               	.LM55:
+ 331 01c6 C091 0000 		lds r28,nowDir+22
+ 332 01ca D091 0000 		lds r29,(nowDir+22)+1
+ 333               	.LVL3:
+ 334 01ce 00C0      		rjmp .L19
+ 335               	.L20:
+ 336               	.LM56:
+ 337 01d0 8FEF      		ldi r24,lo8(-1)
+ 338 01d2 0E94 0000 		call sd_byte
+ 339               	.LM57:
+ 340 01d6 2196      		adiw r28,1
+ 341               	.L19:
+ 342 01d8 82E0      		ldi r24,hi8(512)
+ 343 01da C030      		cpi r28,lo8(512)
+ 344 01dc D807      		cpc r29,r24
+ 345 01de 00F0      		brlo .L20
+ 346               	.LM58:
+ 347 01e0 409A      		sbi 40-32,0
+ 348               	.LM59:
+ 349 01e2 80E0      		ldi r24,lo8(.LC2)
+ 350 01e4 90E0      		ldi r25,hi8(.LC2)
+ 351 01e6 0E94 0000 		call UART_str
+ 352               	.L26:
+ 353               	.LM60:
+ 354 01ea 80E0      		ldi r24,lo8(nowDir)
+ 355 01ec 90E0      		ldi r25,hi8(nowDir)
+ 356 01ee 0E94 0000 		call getNextDir
+ 357               	.LM61:
+ 358 01f2 8091 0000 		lds r24,nowDir
+ 359 01f6 853E      		cpi r24,lo8(-27)
+ 360 01f8 01F0      		breq .L26
+ 361 01fa 8530      		cpi r24,lo8(5)
+ 362 01fc 01F0      		breq .L26
+ 363 01fe 8091 0000 		lds r24,nowDir+9
+ 364 0202 8735      		cpi r24,lo8(87)
+ 365 0204 01F4      		brne .L26
+ 366 0206 8091 0000 		lds r24,nowDir+10
+ 367 020a 8134      		cpi r24,lo8(65)
+ 368 020c 01F4      		brne .L26
+ 369 020e 8091 0000 		lds r24,nowDir+11
+ 370 0212 8635      		cpi r24,lo8(86)
+ 371 0214 01F4      		brne .L26
+ 372               	.LM62:
+ 373 0216 80E0      		ldi r24,lo8(.LC3)
+ 374 0218 90E0      		ldi r25,hi8(.LC3)
+ 375 021a 0E94 0000 		call UART_str
+ 376               	.LM63:
+ 377 021e 0E94 0000 		call SD_openNowDir
+ 378               	.LM64:
+ 379 0222 80E0      		ldi r24,lo8(.LC4)
+ 380 0224 90E0      		ldi r25,hi8(.LC4)
+ 381 0226 0E94 0000 		call UART_str
+ 382               	/* epilogue start */
+ 383               	.LM65:
+ 384 022a FF91      		pop r31
+ 385 022c EF91      		pop r30
+ 386 022e DF91      		pop r29
+ 387 0230 CF91      		pop r28
+ 388               	.LVL4:
+ 389 0232 BF91      		pop r27
+ 390 0234 AF91      		pop r26
+ 391 0236 9F91      		pop r25
+ 392 0238 8F91      		pop r24
+ 393 023a 7F91      		pop r23
+ 394 023c 6F91      		pop r22
+ 395 023e 5F91      		pop r21
+ 396 0240 4F91      		pop r20
+ 397 0242 3F91      		pop r19
+ 398 0244 2F91      		pop r18
+ 399 0246 0F90      		pop r0
+ 400 0248 0FBE      		out __SREG__,r0
+ 401 024a 0F90      		pop r0
+ 402 024c 1F90      		pop __zero_reg__
+ 403 024e 1895      		reti
+ 404               	.LFE2:
+ 406               	.global	wave
+ 407               		.data
+ 410               	wave:
+ 411 0050 80        		.byte	-128
+ 412               		.comm mbr,9,1
+ 413               		.comm bpb,5,1
+ 414               		.comm nowDir,26,1
+ 471               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:2      *ABS*:0000003f __SREG__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:3      *ABS*:0000003e __SP_H__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:4      *ABS*:0000003d __SP_L__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:5      *ABS*:00000034 __CCP__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:20     .text:00000000 timer_init
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:60     .text:00000034 button_init
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:81     .text:00000042 main
+                            *COM*:0000001a nowDir
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:178    .text:000000d0 __vector_14
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:410    .data:00000050 wave
+C:\Users\akira\AppData\Local\Temp/ccViQzwf.s:285    .text:0000017c __vector_1
+                            *COM*:00000009 mbr
+                            *COM*:00000005 bpb
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+sd_init
+SD_readMRB
+SD_readBPB
+getNextDir
+SD_openNowDir
+UART_init
+SD_readNowDir
+UART_str
+wait_ms
+sd_byte
